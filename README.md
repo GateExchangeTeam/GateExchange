@@ -1,2 +1,2 @@
 # GateExchange
-Exchange for Colgate
+StackExchange for Colgate
