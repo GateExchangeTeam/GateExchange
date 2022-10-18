@@ -50,7 +50,6 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem "rspec-rails"
   gem "simplecov"
-  # Use sqlite3 as the database for Active Record
   gem "sqlite3", "~> 1.4"
 end
 
