@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
     def index
-        render 'index' 
-    end    
+        order = 'title'
+        @posts = Post.all
+    end 
   end
