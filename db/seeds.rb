@@ -14,3 +14,11 @@ Post.create!(title:"Prefix number with + if it is positive - Ruby / Rails 4", de
 Post.create!(title:"Sort hash by key, return hash in Ruby", description:"Would this be the best way to sort a hash and return Hash object (instead of Array):", view: 0)
 Post.create!(title:"How to check if a value exists in an array in Ruby", description:"I have a value 'Dog' and an array ['Cat', 'Dog', 'Bird'].", view: 0)
 Post.create!(title:"Navbar fixed on the top of HTML page (CSS / HTML)", description:"I'm trying to learn some of CSS3 and HTML5 but I'm a little confused with somethings. For now, I want create a page with a fixed navbar on the top of page, that scrolls with the page.", view: 0)
+
+Course.delete_all
+
+Course.create!(title:"Software Engineering",course_code:"415",description:"Awesome comp sci course!",department:"COSC",faculty:"Sommers")
+Course.create!(title:"Intro to Computing",course_code:"101",description:"Awesome intro course!",department:"COSC",faculty:"multiple")
+Course.create!(title:"Legacies",course_code:"151",description:"Mandatory core course",department:"CORE",faculty:"Frank")
+Course.create!(title:"Microeconomics",course_code:"251",description:"Required Econ course",department:"ECON",faculty:"Haines")
+Course.create!(title:"Is the Planet Doomed?",course_code:"107",description:"Fun Geography course",department:"GEOG",faculty:"Hamlin")
