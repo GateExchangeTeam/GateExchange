@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_30_211336) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_08_151613) do
+  create_table "comments", force: :cascade do |t|
+    t.string "text_body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "post_id"
+    t.index ["post_id"], name: "index_comments_on_post_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "title"
     t.integer "course_code"
@@ -21,12 +29,29 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_30_211336) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "nested_comments", force: :cascade do |t|
+    t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "comment_id"
+    t.index ["comment_id"], name: "index_nested_comments_on_comment_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.string "description"
     t.integer "view"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "course_id"
+    t.index ["course_id"], name: "index_posts_on_course_id"
+  end
+
+  create_table "posts_tags", id: false, force: :cascade do |t|
+    t.integer "posts_id"
+    t.integer "tags_id"
+    t.index ["posts_id"], name: "index_posts_tags_on_posts_id"
+    t.index ["tags_id"], name: "index_posts_tags_on_tags_id"
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -34,16 +59,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_30_211336) do
     t.integer "down"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "post_id"
+    t.integer "comment_id"
+    t.index ["comment_id"], name: "index_ratings_on_comment_id"
+    t.index ["post_id"], name: "index_ratings_on_post_id"
   end
 
-end
-
-
-ActiveRecord::Schema[7.0].define(version: 2022_10_30_184645) do
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
-    t.string "description"
-    t.integer "view"
+  create_table "tags", force: :cascade do |t|
+    t.string "tag_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
