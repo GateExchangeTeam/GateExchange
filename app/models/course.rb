@@ -1,5 +1,6 @@
 class Course < ApplicationRecord
     #TODO: Add Relations to other models 
+    has_many :posts
 
     validates :title, length: { minimum: 0}, allow_nil: false
     validates :faculty, length: { minimum: 0}, allow_nil: true
