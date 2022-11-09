@@ -1,2 +1,14 @@
 <h1> Welcome to GateExchange </h1>
 <h1> Stack Overflow is going DOWN </h1>
+<br>
+<div>
+Courses
+ <% @courses.each do |course| %>
+    <h2><%= link_to course.title, course_posts_path(course.id) %></h2>
+    <p><%= course.course_code %><p>
+    <p><%= course.description %><p>
+    <p><%= course.department %><p>
+    <p><%= course.faculty %><p>
+    <br>
+ <% end %>
+</div>

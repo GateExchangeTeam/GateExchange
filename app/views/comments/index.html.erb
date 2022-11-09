@@ -1,0 +1,13 @@
+<div>
+#TODO put some info about the question/post up here with comments below
+<h1> Comments for this question </h1>
+ <% if @comments != nil%>
+    <% @comments.each do |c| %>
+        <p><%= c.text_body %><p>
+    <% end %>
+<% else%>
+    No comments to show yet
+<% end%>
+
+ <h2><%= link_to "Comment", new_course_post_comment_path(@course_id, @post_id) %></h2>
+</div>
