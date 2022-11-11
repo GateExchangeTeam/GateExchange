@@ -5,3 +5,5 @@ Please run:
 
 rails db:migrate
 rails db:seed
+
+Project Kanban Board Link: https://github.com/users/jpaints3/projects/1
