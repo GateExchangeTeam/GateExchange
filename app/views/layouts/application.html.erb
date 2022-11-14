@@ -7,10 +7,27 @@
     <%= csp_meta_tag %>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../stylesheets/header.css">
+    <link rel="stylesheet" href="../stylesheets/index.css">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
 
   <body>
+
+  <div class="header-partial">
+    <nav class="navbar bg-light">
+      <div class="container-fluid">
+        <h1 class="navbar-brand">
+          <%=link_to "GateExchange", courses_path%>
+        </h1>
+        <form role="search" class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+  </div>
+
     <% if flash[:notice] %>
     <div class="alert alert-primary">
       <%= "#{flash[:notice]}" %> 
