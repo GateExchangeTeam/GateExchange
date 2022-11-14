@@ -2,7 +2,8 @@
 
 Heroku Link: https://sheltered-sierra-81845.herokuapp.com/
 Please run:
-
+bundle config set --local without production
+bundle install
 rails db:migrate
 rails db:seed
 
