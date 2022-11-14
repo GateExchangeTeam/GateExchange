@@ -5,3 +5,5 @@
 
     <%= comment_form.submit "Reply" %>
   <% end %>
+<br>
+<%= link_to("Back to the post", course_post_path(@course_id,@post_id), :class => "btn btn-primary")%>
