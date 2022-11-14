@@ -9,17 +9,8 @@
    <br>
    
    <h3>Courses</h3>
-   <div>
+   <div class="cards">
       <% @courses.each do |course| %>
-         <!--
-            TODO: Include each of these parts in course show
-            <h2><%= link_to course.title, course_posts_path(course.id) %></h2>
-            <p><%= course.course_code %><p>
-            <p><%= course.description %><p>
-            <p><%= course.department %><p>
-            <p><%= course.faculty %><p>
-            <br>
-         -->
          <%= render "layouts/card", card_title: course.title, card_text: course.description, card_link: course_posts_path(course.id)%> 
       <% end %>
    </div>
