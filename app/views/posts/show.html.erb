@@ -1,13 +1,54 @@
-<div>
-#TODO put some info about the question/post up here with comments below
-<h1> Comments for this question </h1>
- <% if @comments != nil%>
-    <% @comments.each do |c| %>
-        <p><%= c.text_body %><p>
-    <% end %>
-<% else%>
-    No comments to show yet
-<% end%>
+<!--<div>-->
+<!--#TODO put some info about the question/post up here with comments below-->
+<!--<h1> Comments for this question </h1>-->
 
- <h2><%= link_to "Comment", new_course_post_comment_path(@course_id, @post_id) %></h2>
+
+<!-- <h2><%#= link_to "Comment", new_course_post_comment_path(@course_id, @post_id) %></h2>-->
+<!--</div>-->
+
+<div class="container-fluid">
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">
+        <%= @post.title %>
+      </h5>
+      <h6 class="card-subtitle mb-2 text-muted">Asked in <a href=<%= course_posts_path(@post.course.id) %> class="card-link"><%= @post.course.title %></a></h6>
+      <p class="card-text">
+        <%= @post.description %>
+      </p>
+      <a href="<%= new_course_post_comment_path(@course_id, @post_id) %>" class="card-link">Reply</a>
+    </div>
+
+    <div class="card-footer">
+
+      <% if @comments.count > 0%>
+
+        <ul class="list-group list-group-flush">
+
+          <% @comments.each do |c| %>
+
+            <li class="list-group-item"><%= c.text_body %></li>
+
+          <% end %>
+
+        </ul>
+
+
+      <% else%>
+        <p>
+
+          <em class="text-success">
+            Be the first one to answer this question
+          </em>
+
+        </p>
+
+      <% end%>
+
+    </div>
+
+
+  </div>
+
 </div>
