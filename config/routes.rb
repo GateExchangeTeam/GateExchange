@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root 'courses#index'
+  root 'landing#index'
   resources :tags
 
   resources :courses do
