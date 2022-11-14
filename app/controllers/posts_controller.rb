@@ -12,7 +12,8 @@ class PostsController < ApplicationController
   def show
     @course_id = params[:course_id]
     @post_id = params[:id]
-    @comments = Course.find(params[:course_id]).posts.find(params[:id]).comments.all
+    @post = Course.find(params[:course_id]).posts.find(params[:id])
+    @comments = @post.comments.all
   end
 
   def new
