@@ -18,7 +18,8 @@ class PostsController < ApplicationController
           redirect_to course_posts_path(params[:course_id])
         else
           flash[:warning] = "Post couldn't be created" 
-          render 'new'
+          redirect_to(new_course_post_path(params[:id]), alert: 'Post couldnt be created') and return
+          # redirect_to courses_path(params[:id]) and return
         end
     end
 
