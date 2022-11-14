@@ -2,6 +2,7 @@ class PostsController < ApplicationController
     def index
         order = 'title'
         c = Course.find(params[:course_id])
+        @course = c
         @id = params[:course_id]
         @posts = c.posts
     end 
