@@ -9,3 +9,6 @@
   rails db:seed
 ```
 - Project Kanban Board Link: https://github.com/users/jpaints3/projects/1
+
+## Credits
+  - Landing Page Template https://cruip.com/demos/solid/
