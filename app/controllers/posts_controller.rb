@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
   def index
     order = 'title'
     c = Course.find(params[:course_id])
@@ -22,13 +24,14 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Course.find(params[:course_id]).posts.create(create_params) # create a new post for this specific course
+    @post = Course.find(params[:course_id]).posts.create(create_params) #create a new post for this specific course
     if @post.save
       flash[:notice] = "Post #{@post.title} successfully created"
       redirect_to course_posts_path(params[:course_id])
     else
       flash[:warning] = "Post couldn't be created"
-      render 'new'
+      # render 'new' 
+      redirect_to(new_course_post_path(params[:course_id]), alert: "Post couldn't be created") and return
     end
   end
 
@@ -36,5 +39,10 @@ class PostsController < ApplicationController
 
   def create_params
     params.require(:post).permit(:title, :description) # plus any other fields
+  end
+
+  def record_not_found
+    flash[:alert] = 'No such post'
+    redirect_to course_posts_path and return
   end
 end

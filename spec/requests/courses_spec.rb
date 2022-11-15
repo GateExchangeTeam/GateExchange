@@ -2,8 +2,9 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Courses', type: :request do
-  describe 'GET /index' do
-    pending "add some examples (or delete) #{__FILE__}"
+RSpec.describe "Course Index paths", type: :request do
+  it "should correctly route for the index view" do
+    get courses_path
+    expect(response).to have_http_status(:ok)
   end
 end
