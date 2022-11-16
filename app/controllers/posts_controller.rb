@@ -4,11 +4,9 @@ class PostsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
-    order = 'title'
-    c = Course.find(params[:course_id])
-    @course = c
+    @course = Course.find(params[:course_id])
     @id = params[:course_id]
-    @posts = c.posts
+    @posts = @course.posts
   end
 
   def show

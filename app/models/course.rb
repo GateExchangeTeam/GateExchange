@@ -13,4 +13,11 @@ class Course < ApplicationRecord
   def generate_full_code
     department + course_code.to_s
   end
+
+  def num_comms
+    @sum = 0
+    posts.each { |p| @sum += p.comments.count }
+    @sum
+  end
+
 end
