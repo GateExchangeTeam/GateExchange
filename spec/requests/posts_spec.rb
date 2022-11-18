@@ -16,6 +16,11 @@ RSpec.describe 'Post Index paths', type: :request do
     expect(response).to have_http_status(:ok)
   end
 
+  it 'should correctly route for the all posts view' do
+    get posts_path
+    expect(response).to have_http_status(:ok)
+  end
+
   it 'should correctly route for the show view' do
     get course_post_path('1', '1')
     expect(response).to have_http_status(:ok)
