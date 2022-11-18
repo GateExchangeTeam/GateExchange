@@ -6,7 +6,6 @@ class Post < ApplicationRecord
   has_many :comments
   has_many :ratings
 
-  validates :title, length: { minimum: 1}
-  validates :description, length: { minimum: 1}
-
+  validates :title, length: { minimum: 1 }
+  validates :description, length: { minimum: 1 }
 end

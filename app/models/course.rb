@@ -13,5 +13,4 @@ class Course < ApplicationRecord
   def generate_full_code
     department + course_code.to_s
   end
-
 end
