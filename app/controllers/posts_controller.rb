@@ -27,7 +27,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Course.find(params[:course_id]).posts.create(create_params) #create a new post for this specific course
+    @post = Course.find(params[:course_id]).posts.new(create_params) #create a new post for this specific course
+    @post.view = 0
     if @post.save
       flash[:notice] = "Post #{@post.title} successfully created"
       redirect_to course_posts_path(params[:course_id])
