@@ -3,6 +3,11 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title"><%= post.title %></h5>
+        <% if local_assigns[:all_courses] %>
+          <h6 class="card-subtitle mb-2 text-muted">
+            Asked in <a href=<%= course_posts_path(post.course.id) %>><%= post.course.title %></a>
+          </h6>
+      <% end %>
         <p class="card-text"><%=  truncate(post.description, length: 280, separator: ' ') %></p>
         <a href="<%= course_post_path(post.course.id, post.id) %>" class="btn btn-success">View details</a>
         <button class="btn btn-warning disabled"><%= post.view %> views &nbsp; <i class="fa fa-eye"></i> </button>
