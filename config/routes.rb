@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   root 'landing#index'
+  get '/posts', to: 'posts#all'
   resources :tags
 
   resources :courses do

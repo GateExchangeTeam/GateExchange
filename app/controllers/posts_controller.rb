@@ -9,6 +9,11 @@ class PostsController < ApplicationController
     @posts = @course.posts
   end
 
+  def all
+    @posts = Post.all
+    render 'posts/all'
+  end
+
   def show
     @course_id = params[:course_id]
     @post_id = params[:id]
