@@ -1,6 +1,5 @@
 <%= stylesheet_link_tag "posts", "data-turbo-track": "reload" %>
-<div class="container-fluid" style="padding: 1em">
-
+<div class="container-fluid" id="posts-show-container">
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">
@@ -12,39 +11,31 @@
       </p>
       <a href="<%= new_course_post_comment_path(@course_id, @post_id) %>" class="card-link">Reply</a>
     </div>
-
-    <div class="card-footer">
-
+    <div class="card-footer comment-bg">
       <% if @comments.count > 0%>
-
         <ul class="list-group list-group-flush">
-
           <% @comments.each do |c| %>
-
-            <li class="list-group-item"><%= c.text_body %></li>
-
+            <li class="list-group-item border-0 comment-bg">
+              <div class="card bg-light bg-gradient text-dark hover-overlay ripple rounded">
+                <div class="card-body">
+                  <div class="card-text comment-text">
+                    <%= c.text_body %>
+                  </div>
+                </div>
+              </div>
+            </li>
           <% end %>
-
         </ul>
-
-
       <% else%>
         <p>
-
           <em class="text-success">
             Be the first one to answer this question
           </em>
-
         </p>
-
       <% end%>
-
     </div>
-
-
   </div>
-
   <br>
   <%= link_to("Back to course", course_posts_path(@course_id), :class => "btn btn-primary")%>
-
 </div>
+<%= javascript_include_tag 'posts', :cache => true %>

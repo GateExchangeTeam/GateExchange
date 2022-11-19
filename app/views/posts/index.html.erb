@@ -1,14 +1,14 @@
 <%= stylesheet_link_tag "posts", "data-turbo-track": "reload" %>
 <div class="container-fluid bg-dark text-dark">
   <div class="row">
-    <div class="col-md-12" style="padding-top: 2rem">
+    <div class="col-md-12" id="posts-index-header">
       <div class="text-center text-light">
         <h1> Posts for <%= @course.title %> </h1>
       </div>
     </div>
   </div>
   <br>
-  <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="padding-right: 3.5em">
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end" id="question-btn-container">
     <a class="btn btn-primary me-md-2" type="button" href="<%= new_course_post_path(@id) %>" >
       <i class="bi bi-pencil-square">
         Ask a question

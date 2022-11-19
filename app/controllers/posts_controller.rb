@@ -23,7 +23,8 @@ class PostsController < ApplicationController
 
   def new
     @id = params[:course_id]
-    @post = Course.find(params[:course_id]).posts.new # create a new post for this specific course
+    @course = Course.find(@id)
+    @post = @course.posts.new # create a new post for this specific course
   end
 
   def create

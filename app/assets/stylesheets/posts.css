@@ -1,3 +1,15 @@
 body{
     background-color: var(--mdb-dark) !important;
 }
+.comment-bg{
+    background-color: #4a4343;
+}
+#posts-show-container{
+    padding: 1em;
+}
+#posts-index-header{
+   padding-top: 2rem;
+}
+#question-btn-container{
+    padding-right: 3.5em;
+}

@@ -1,6 +1,6 @@
 <div class="container">
   <br>
-  <h3 class="display-5"> Ask a question for <%= Course.find(@id).title %> </h3>
+  <h3 class="display-5"> Ask a question for <%= @course.title %> </h3>
   <br>
   <%= form_with model: @post, url: course_posts_path(@id), method: :post, local: true do |post_form| %>
     <div class="form-outline mb-4">
@@ -9,7 +9,7 @@
     </div>
 
     <div class="form-outline mb-4">
-      <%= post_form.text_area :description, :class => "form-control", :id=>"form4Example4"  %>
+      <%= post_form.text_area :description, :class => "form-control", :id=>"form4Example4", :rows=>"4" %>
       <label class="form-label" for="form4Example4">Description</label>
     </div>
 
