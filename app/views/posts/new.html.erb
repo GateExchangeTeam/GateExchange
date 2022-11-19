@@ -1,12 +1,20 @@
-<h1> Ask a new Question </h1>
-<%= form_with model: @post, url: course_posts_path(@id), method: :post, local: true do |post_form| %>
-    <%= post_form.label :Title %>
-    <%= post_form.text_field :title %>
-  
-    <%= post_form.label :Question %>
-    <%= post_form.text_field :description %>
+<div class="container">
+  <br>
+  <h3 class="display-5"> Ask a question for <%= Course.find(@id).title %> </h3>
+  <br>
+  <%= form_with model: @post, url: course_posts_path(@id), method: :post, local: true do |post_form| %>
+    <div class="form-outline mb-4">
+      <%= post_form.text_field :title, :class => "form-control", :id=>"form4Example3"  %>
+      <label class="form-label" for="form4Example3">Title</label>
+    </div>
 
-    <%= post_form.submit "Submit" %>
+    <div class="form-outline mb-4">
+      <%= post_form.text_area :description, :class => "form-control", :id=>"form4Example4"  %>
+      <label class="form-label" for="form4Example4">Description</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>
   <% end %>
-<br>
-<%= link_to("Back to posts", course_posts_path, :class => "btn btn-primary")%>
+  <br>
+  <%= link_to("Back to posts", course_posts_path, :class => "btn btn-primary")%>
+</div>
