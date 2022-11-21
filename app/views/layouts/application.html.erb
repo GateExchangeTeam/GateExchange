@@ -44,18 +44,25 @@
     </nav>
   </div>
 
-    <% if flash[:notice] %>
-    <div class="alert alert-primary">
-      <%= "#{flash[:notice]}" %> 
-    </div>
-  <% end %>
+  <% if flash[:notice] or flash[:warning] %>
 
-  <% if flash[:warning] %>
-    <div class="alert alert-warning">
-      <%= "#{flash[:warning]}" %>
-    </div>
-  <% end %>
+    <div class="container flash-messages">
+      <br>
+      <% if flash[:notice] %>
+        <div class="alert alert-primary">
+          <%= "#{flash[:notice]}" %>
+        </div>
+      <% end %>
 
+      <% if flash[:warning] %>
+        <div class="alert alert-warning">
+          <%= "#{flash[:warning]}" %>
+        </div>
+      <% end %>
+      <br>
+    </div>
+
+  <% end %>
   <%= yield %>
 
   <!-- MDB -->

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'capybara/dsl'
+require 'selenium-webdriver'
 
 RSpec.describe 'create post', type: :feature do
   before :each do
@@ -13,7 +15,7 @@ RSpec.describe 'create post', type: :feature do
   it 'should successfully create a post' do
     click_on 'Ask a question'
     fill_in 'post[title]', with: 'Test title'
-    fill_in 'post[description]', with: 'Test i have a question'
+    find(:xpath, "//input[@id='post_content_trix_input_post']", :visible=>false).set "I have a question"
     click_on 'Submit'
     expect(page.current_path).to eq('/courses/1/posts')
     expect(page).to have_content('Post Test title successfully created')
@@ -23,7 +25,7 @@ RSpec.describe 'create post', type: :feature do
   it 'should handle failure to create a post gracefully' do
     click_on 'Ask a question'
     fill_in 'post[title]', with: ''
-    fill_in 'post[description]', with: ''
+    find(:xpath, "//input[@id='post_content_trix_input_post']", :visible=>false).set ''
     click_on 'Submit'
 
     # p = @course.posts.new

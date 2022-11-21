@@ -9,8 +9,8 @@
     </div>
 
     <div class="form-outline mb-4">
-      <%= post_form.rich_text_area :content, :id=>"form4Example4", :rows=>"4" %>
-      <label class="form-label" for="form4Example4">Description</label>
+      <%= post_form.rich_text_area :content, :rows=>"4" %>
+      <%= post_form.label :content, "Description", :class=>"form-label" %>
     </div>
 
     <button type="submit" class="btn btn-primary btn-block mb-4">Submit</button>

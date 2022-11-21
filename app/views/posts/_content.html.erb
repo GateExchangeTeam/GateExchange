@@ -1,0 +1,6 @@
+<% if @post.content.id.nil? %>
+  <p class="card-text"><%= @post.description %></p>
+<% else %>
+  <br>
+  <%= @post.content %>
+<% end %>
