@@ -6,9 +6,13 @@
         <%= @post.title %>
       </h5>
       <h6 class="card-subtitle mb-2 text-muted">Asked in <a href=<%= course_posts_path(@post.course.id) %> class="card-link"><%= @post.course.title %></a></h6>
-      <p class="card-text">
-        <%= @post.description %>
-      </p>
+      <br>
+      <div class="card">
+        <div class="card-body">
+          <%= @post.content %>
+        </div>
+      </div>
+      <br>
       <a href="<%= new_course_post_comment_path(@course_id, @post_id) %>" class="card-link">Reply</a>
     </div>
     <div class="card-footer comment-bg">

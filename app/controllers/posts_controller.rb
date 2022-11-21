@@ -29,6 +29,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Course.find(params[:course_id]).posts.new(create_params) # create a new post for this specific course
+    @post.description = @post.content.to_plain_text.strip
     @post.view = 0
     if @post.save
       flash[:notice] = "Post #{@post.title} successfully created"
