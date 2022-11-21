@@ -43,7 +43,7 @@ class PostsController < ApplicationController
   private
 
   def create_params
-    params.require(:post).permit(:title, :description) # plus any other fields
+    params.require(:post).permit(:title, :content) # plus any other fields
   end
 
   def record_not_found
