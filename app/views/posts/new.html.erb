@@ -4,12 +4,12 @@
   <br>
   <%= form_with model: @post, url: course_posts_path(@id), method: :post, local: true do |post_form| %>
     <div class="form-outline mb-4">
-      <%= post_form.text_field :title, :class => "form-control", :id=>"form4Example3"  %>
+      <%= post_form.text_field :title, :class => "form-control", :id=>"form4Example3", :autocomplete=>"off"  %>
       <label class="form-label" for="form4Example3">Title</label>
     </div>
 
     <div class="form-outline mb-4">
-      <%= post_form.rich_text_area :content, :class => "", :id=>"form4Example4", :rows=>"4" %>
+      <%= post_form.rich_text_area :content, :id=>"form4Example4", :rows=>"4" %>
       <label class="form-label" for="form4Example4">Description</label>
     </div>
 
