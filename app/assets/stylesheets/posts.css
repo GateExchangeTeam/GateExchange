@@ -20,3 +20,12 @@ body{
 .comment-header .comment-pfp{
     margin-right: 1em;
 }
+.comment-uname.badge{
+    padding: 0.7em;
+}
+.card-shadow{
+    transition: box-shadow 350ms ease-in-out;
+}
+.card-shadow:hover{
+    box-shadow: 5px 7px var(--mdb-gray-300);
+}
