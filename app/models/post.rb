@@ -7,4 +7,5 @@ class Post < ApplicationRecord
   has_many :ratings
   has_rich_text :content
   validates :title, length: { minimum: 1 }
+  validates :description, length: { minimum: 1}
 end

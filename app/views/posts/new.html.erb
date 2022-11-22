@@ -3,18 +3,22 @@
   <h3 class="display-5"> Ask a question for <%= @course.title %> </h3>
   <br>
   <%= form_with model: @post, url: course_posts_path(@id), method: :post, local: true do |post_form| %>
+
     <div class="form-outline mb-4">
       <%= post_form.text_field :title, :class => "form-control", :id=>"form4Example3", :autocomplete=>"off"  %>
       <label class="form-label" for="form4Example3">Title</label>
     </div>
 
+    <div class="form-outline mb-4" id="toolbar-container"></div>
+
     <div class="form-outline mb-4">
-      <%= post_form.rich_text_area :content, :rows=>"4" %>
+      <%= post_form.rich_text_area :content, :rows=>"4", :class=>"form-control" %>
       <%= post_form.label :content, "Description", :class=>"form-label" %>
     </div>
 
-    <button type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+    <button type="submit" class="btn btn-success btn-block mb-4">Submit</button>
   <% end %>
   <br>
   <%= link_to("Back to posts", course_posts_path, :class => "btn btn-primary")%>
 </div>
+<%= javascript_include_tag 'posts', :cache => true %>
