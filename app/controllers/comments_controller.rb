@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  def new
-    @course_id = params[:course_id]
-    @post_id = params[:post_id]
-    @comment = Course.find(params[:course_id]).posts.find(params[:post_id]).comments.new
-  end
-
   def create
     @course_id = params[:course_id]
     @post_id = params[:post_id]
