@@ -1,19 +1,8 @@
-
-.main-content h1 {
-    width: 100%;
-    margin: 3em auto 1em;
-    padding-right: 3em;
-    font-size: 25px;
-    text-align: center;
+body{
+    background-color: #ffffff;
+    background-image: radial-gradient(#444cf7 0.5px, #ffffff 0.5px);
+    background-size: 10px 10px;
 }
-.main-content h1 small {
-    text-transform: none;
-    display: block;
-    margin: 20px 0;
-    font: 300 20px "QuickSand", sans-serif;
-    color: #999;
-}
-
 .main-content h4 {
     width: 100%;
     margin: 2em auto 0;
@@ -32,7 +21,8 @@
     display: block;
     margin: 10px 0;
     font: 300 15px "QuickSand", sans-serif;
-    color: #999;
+    font-weight: bold;
+    color: black;
 }
 
 .main-content {
@@ -89,7 +79,7 @@
 }
 
 .palette:hover .palette__cover {
-    transform: rotateX(78deg);
+    transform: rotateX(80deg);
 }
 
 @keyframes startTransition {
@@ -149,3 +139,22 @@
     max-width: 59%;
     background: #2a2e45;
 }
+
+.palette--maroon .palette__cover {
+    background: maroon;
+}
+
+.palette--maroon .palette__cover span {
+    max-width: 59%;
+    background: maroon;
+}
+
+.palette--green .palette__cover {
+    background: var(--mdb-success);
+}
+
+.palette--green .palette__cover span {
+    max-width: 59%;
+    background: var(--mdb-success);
+}
+

@@ -8,31 +8,35 @@
   </div>
 
   <div class="main-content">
+    <%= render "_palette",
+               color:"maroon",
+               class_code:"All",
+               views: @num_views,
+               posts:@num_posts,
+               comments:@num_comments,
+               clink: posts_path,
+               class_name: "All posts",
+               class_desc: "View all the posts on our site" %>
+  </div>
+
+  <div class="main-content">
     <% @color = 0 %>
-    <% @colors = %w[red yellow blue black] %>
+    <% @colors = %w[green yellow blue black red] %>
     <% @courses.each do |c| %>
 
       <div class="palette__wrapper">
-        <div class="palette palette--<%= @colors[@color] %>">
-          <div class="palette__cover">
-            <div class="palette__cover__border"><span><%= c.generate_full_code %></span></div>
-          </div>
-          <h4 class="note note-danger mb-3">
-            <%= pluralize c.posts.sum(:view), 'View'  %>
-          </h4>
-          <h4 class="note note-success mb-3">
-            <%= pluralize c.posts.count, 'Post' %>
-          </h4>
-          <h4 class="note note-info mb-3">
-            <%= pluralize c.comments.count, 'Comment' %>
-          </h4>
-        </div>
-        <h4>
-          <a href=<%= course_posts_path(c.id)%>><%= c.title %></a>
-          <small><%= c.description %></small>
-        </h4>
+        <%= render "_palette",
+                   color:@colors[@color],
+                   class_code:c.generate_full_code,
+                   views: c.posts.sum(:view),
+                   posts:c.posts.count,
+                   comments: c.comments.count,
+                   clink: course_posts_path(c.id),
+                   class_name: c.title,
+                   class_desc: c.description %>
       </div>
-      <% if@color == 3 %>
+
+      <% if@color == @colors.length %>
         <% @color = 0 %>
       <% else %>
         <% @color += 1 %>
@@ -41,3 +45,4 @@
   </div>
 </div>
 
+<%= javascript_include_tag 'courses', :cache => true %>

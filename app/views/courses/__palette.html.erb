@@ -1,0 +1,20 @@
+<div class="palette__wrapper">
+  <div class="palette palette--<%= local_assigns[:color] %>">
+    <div class="palette__cover">
+      <div class="palette__cover__border"><span><%= local_assigns[:class_code] %></span></div>
+    </div>
+    <h4 class="note note-danger mb-3">
+      <%= pluralize views, "View"  %>
+    </h4>
+    <h4 class="note note-success mb-3">
+      <%= pluralize posts, "Post"  %>
+    </h4>
+    <h4 class="note note-info mb-3">
+      <%= pluralize comments, "Comment"  %>
+    </h4>
+  </div>
+  <h4>
+    <a href=<%= local_assigns[:clink] %>><%= local_assigns[:class_name] %></a>
+    <small><%= local_assigns[:class_desc] %></small>
+  </h4>
+</div>
