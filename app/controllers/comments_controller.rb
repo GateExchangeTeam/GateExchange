@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     else
       flash[:warning] = "Comment couldn't be created"
       # render 'new'
-      redirect_to(new_course_post_comment_path(params[:course_id], params[:post_id]),
+      redirect_to(course_post_path(params[:course_id], params[:post_id]),
                   alert: "Post couldn't be created") and return
     end
   end

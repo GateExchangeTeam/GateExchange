@@ -72,7 +72,7 @@ RSpec.describe 'create comment', type: :feature do
     # p = @course.posts.new
     # expect(p).to receive(:save) { nil }
     # allow(Post).to receive(:new) { p }
-    expect(page.current_path).to eq('/courses/1/posts/1/comments/new')
+    expect(page.current_path).to eq('/courses/1/posts/1')
     # expect(page).to have_content("Post couldn't be created")
     expect(page).to have_content("Comment couldn't be created")
   end
