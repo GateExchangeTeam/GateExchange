@@ -20,12 +20,30 @@ const trimComments = ()=>{
     });
 }
 
-const formFixer = ()=>{
+const trixFormFixer = ()=>{
     $("#trix-toolbar-1").appendTo("#toolbar-container");
+}
+
+const replyForm = ()=>{
+    const rF = $("#replyForm");
+    const rT =  $("#replyToggle");
+    rF.hide();
+    rT.click(function (){
+        if(rF.is(":visible")){
+            rT.text("Reply");
+            rF.slideUp(500);
+        }
+        else{
+            rT.text("Hide");
+            rF.slideDown(500);
+        }
+
+    })
 }
 
 $(document).ready(()=>{
     trimComments();
-    formFixer();
+    trixFormFixer();
+    replyForm();
 });
 

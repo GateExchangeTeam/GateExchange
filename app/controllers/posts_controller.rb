@@ -19,6 +19,7 @@ class PostsController < ApplicationController
     @post_id = params[:id]
     @post = Course.find(params[:course_id]).posts.find(params[:id])
     @comments = @post.comments.all
+    @comment = @post.comments.new
   end
 
   def new

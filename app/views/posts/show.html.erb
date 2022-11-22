@@ -8,7 +8,10 @@
       </h5>
       <h6 class="card-subtitle mb-2 text-muted">Asked in <a href=<%= course_posts_path(@post.course.id) %> class="card-link"><%= @post.course.title %></a></h6>
       <%= render 'content' %>
-      <a href="<%= new_course_post_comment_path(@course_id, @post_id) %>" class="card-link">Reply</a>
+
+      <a href="javascript:void(0)" id="replyToggle" class="card-link">Reply</a>
+      <%= render 'comments/form' %>
+
     </div>
     <div class="card-footer comment-bg">
       <% if @comments.count > 0%>
