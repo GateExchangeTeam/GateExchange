@@ -157,4 +157,10 @@ body{
     max-width: 59%;
     background: var(--mdb-success);
 }
-
+.note{
+    transition: transform 175ms ease-in;
+    font-weight: bold;
+}
+.note:hover{
+    transform: scale(1.1);
+}

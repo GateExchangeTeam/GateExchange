@@ -10,11 +10,11 @@
   <div class="main-content">
     <%= render "_palette",
                color:"maroon",
-               class_code:"All",
+               class_code:"all",
                views: @num_views,
                posts:@num_posts,
                comments:@num_comments,
-               clink: posts_path,
+               c_link: posts_path,
                class_name: "All posts",
                class_desc: "View all the posts on our site" %>
   </div>
@@ -31,7 +31,7 @@
                    views: c.posts.sum(:view),
                    posts:c.posts.count,
                    comments: c.comments.count,
-                   clink: course_posts_path(c.id),
+                   c_link: course_posts_path(c.id),
                    class_name: c.title,
                    class_desc: c.description %>
       </div>
