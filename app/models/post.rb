@@ -6,6 +6,6 @@ class Post < ApplicationRecord
   has_many :comments
   has_many :ratings
   has_rich_text :content
-  validates :title, length: { minimum: 1 }
-  validates :description, length: { minimum: 1}
+  validates :title, length: { minimum: 1 }, presence: true
+  validates :description, length: { minimum: 1 }, presence: true
 end
