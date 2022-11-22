@@ -55,9 +55,9 @@ RSpec.describe 'create comment', type: :feature do
 
   it 'should successfully create a comment' do
     click_on 'View details'
-    click_on 'Reply'
+    find("#replyToggle").click
     fill_in 'comment[text_body]', with: 'This is a comment'
-    click_on 'Reply'
+    find('#replySubmit').click
     expect(page.current_path).to eq('/courses/1/posts/1')
     expect(page).to have_content('Reply sent')
     expect(page).to have_content('This is a comment')
@@ -65,9 +65,9 @@ RSpec.describe 'create comment', type: :feature do
 
   it 'should handle failure to create a comment gracefully' do
     click_on 'View details'
-    click_on 'Reply'
+    find("#replyToggle").click
     fill_in 'comment[text_body]', with: ''
-    click_on 'Reply'
+    find('#replySubmit').click
 
     # p = @course.posts.new
     # expect(p).to receive(:save) { nil }
