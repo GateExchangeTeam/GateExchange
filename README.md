@@ -12,3 +12,4 @@
 
 ## Credits
   - Landing Page Template https://cruip.com/demos/solid/
+  - Courses grid Ui https://codepen.io/oliviale/pen/bOWqbj

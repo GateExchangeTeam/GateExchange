@@ -1,97 +1,43 @@
-<%= stylesheet_link_tag "forum", "data-turbo-track": "reload" %>
-<div class="container-fluid" id="courses-container">
+<%= stylesheet_link_tag "courses", "data-turbo-track": "reload" %>
+<div class="container-fluid">
+  <br>
   <div class="row">
-    <div class="col-lg-12">
-      <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="ibox-content m-b-sm border-bottom">
-          <div class="p-xs">
-            <h2 class="text-center">Courses</h2>
-            <p class="text-center">View all the courses in our directory.</p>
+    <h1 class="display-6 text-center">
+      All Courses
+    </h1>
+  </div>
+
+  <div class="main-content">
+    <% @color = 0 %>
+    <% @colors = %w[red yellow blue black] %>
+    <% @courses.each do |c| %>
+
+      <div class="palette__wrapper">
+        <div class="palette palette--<%= @colors[@color] %>">
+          <div class="palette__cover">
+            <div class="palette__cover__border"><span><%= c.generate_full_code %></span></div>
           </div>
+          <h4 class="note note-danger mb-3">
+            <%= pluralize c.posts.sum(:view), 'View'  %>
+          </h4>
+          <h4 class="note note-success mb-3">
+            <%= pluralize c.posts.count, 'Post' %>
+          </h4>
+          <h4 class="note note-info mb-3">
+            <%= pluralize c.comments.count, 'Comment' %>
+          </h4>
         </div>
-        <div class="ibox-content forum-container">
-          <div class="forum-item">
-            <div class="row">
-              <div class="col-md-9">
-                <div class="forum-icon">
-                  <i class="fa fa-map"></i>
-                </div>
-                <a href=<%= posts_path %> class="forum-item-title">
-                  All posts
-                </a>
-                <div class="forum-sub-title">
-                  See posts across all courses
-                </div>
-              </div>
-              <div class="col-md-1 forum-info">
-                            <span class="views-number">
-                              <%= @num_views %>
-                            </span>
-                <div>
-                  <small>Views</small>
-                </div>
-              </div>
-              <div class="col-md-1 forum-info">
-                            <span class="views-number">
-                              <%= @num_posts %>
-                            </span>
-                <div>
-                  <small>Posts</small>
-                </div>
-              </div>
-              <div class="col-md-1 forum-info">
-                            <span class="views-number">
-                              <%= @num_comments %>
-                            </span>
-                <div>
-                  <small>Comments</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <% @courses.each_with_index do |c,i| %>
-            <div class="forum-item active">
-              <div class="row">
-                <div class="col-md-9">
-                  <div class="forum-icon">
-                    <i class="fa fa-<%= i%2==0? 'school': 'book'%>"></i>
-                  </div>
-                  <a href=<%= course_posts_path(c.id) %> class="forum-item-title">
-                    <%= c.title %>
-                  </a>
-                  <div class="forum-sub-title">
-                    <%= c.description %>
-                  </div>
-                </div>
-                <div class="col-md-1 forum-info">
-                            <span class="views-number">
-                                <%= c.posts.sum(:view) %>
-                            </span>
-                  <div>
-                    <small>Views</small>
-                  </div>
-                </div>
-                <div class="col-md-1 forum-info">
-                            <span class="views-number">
-                               <%= c.posts.count %>
-                            </span>
-                  <div>
-                    <small>Posts</small>
-                  </div>
-                </div>
-                <div class="col-md-1 forum-info">
-                            <span class="views-number">
-                               <%= c.comments.count %>
-                            </span>
-                  <div>
-                    <small>Comments</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        </div>
+        <h4>
+          <a href=<%= course_posts_path(c.id)%>><%= c.title %></a>
+          <small><%= c.description %></small>
+        </h4>
       </div>
-    </div>
+      <% if@color == 3 %>
+        <% @color = 0 %>
+      <% else %>
+        <% @color += 1 %>
+      <% end %>
+    <% end %>
   </div>
 </div>
+

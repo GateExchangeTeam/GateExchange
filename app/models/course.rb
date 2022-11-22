@@ -11,6 +11,6 @@ class Course < ApplicationRecord
   validates :course_code, comparison: { greater_than: 100, less_than: 500 }, allow_nil: false
 
   def generate_full_code
-    department + course_code.to_s
+    department + " " + course_code.to_s
   end
 end
