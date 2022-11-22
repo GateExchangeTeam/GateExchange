@@ -21,4 +21,4 @@
   <br>
   <%= link_to("Back to posts", course_posts_path, :class => "btn btn-primary")%>
 </div>
-<%= javascript_include_tag 'posts', :cache => true %>
+<%= javascript_include_tag 'posts', defer: 'defer'%>

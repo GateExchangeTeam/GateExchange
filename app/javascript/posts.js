@@ -21,7 +21,7 @@ const trimComments = ()=>{
 }
 
 const trixFormFixer = ()=>{
-    $("#trix-toolbar-1").appendTo("#toolbar-container");
+    $("#trix-toolbar-1").appendTo($("#toolbar-container"));
 }
 
 const replyForm = ()=>{
@@ -41,9 +41,18 @@ const replyForm = ()=>{
     })
 }
 
-$(document).ready(()=>{
+function main(){
     trimComments();
     trixFormFixer();
     replyForm();
-});
+}
 
+// Alternative to load event
+document.onreadystatechange = () => {
+    /*
+        $(document).ready not working properly on firefox
+     */
+    if (document.readyState === "complete") {
+        main();
+    }
+};
