@@ -1,6 +1,24 @@
 <div class="row">
   <div class="col-md-12">
     <div class="card">
+      <div class="card-header">
+        <div class="container-fluid">
+          <div class="comment-header">
+            <span class="comment-pfp">
+                    <img
+                      src="https://avatars.dicebear.com/api/bottts/<%= post.id %>.svg"
+                      class="rounded-circle comment-pic"
+                      height="30"
+                      alt="Robot"
+                      loading="lazy"
+                      />
+            </span>
+            <span class="comment-uname">
+            <a href="">Username</a>
+          </span>
+          </div>
+        </div>
+      </div>
       <div class="card-body">
         <h5 class="card-title"><%= post.title %></h5>
         <% if local_assigns[:all_courses] %>

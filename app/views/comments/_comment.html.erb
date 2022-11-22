@@ -1,0 +1,48 @@
+<li class="list-group-item border-0 comment-bg">
+  <div class="card bg-light bg-gradient text-dark">
+    <div class="card-header">
+      <div class="container-fluid">
+        <div class="comment-header">
+            <span class="comment-pfp">
+                    <img
+                      src="https://avatars.dicebear.com/api/bottts/<%= comment.id %>.svg"
+                      class="rounded-circle comment-pic"
+                      height="30"
+                      alt="Robot"
+                      loading="lazy"
+                      />
+            </span>
+          <span class="comment-uname">
+            <a href="">Username</a>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-11">
+            <div class="card-text comment-text">
+              <%= comment.text_body %>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="row">
+              <button class="btn btn-success hover-overlay ripple rounded-9">
+                <i class="fa-solid fa-thumbs-up"></i>
+              </button>
+            </div>
+
+            <br>
+
+            <div class="row">
+              <button class="btn btn-danger hover-overlay ripple rounded-9">
+                <i class="fa-solid fa-thumbs-down"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>

@@ -13,3 +13,10 @@ body{
 #question-btn-container{
     padding-right: 3.5em;
 }
+.card-subtitle.mb-2.text-muted{
+    margin-top: 0.5rem !important;
+    margin-bottom: 1rem !important;
+}
+.comment-header .comment-pfp{
+    margin-right: 1em;
+}
