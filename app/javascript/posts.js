@@ -28,7 +28,7 @@ const replyForm = ()=>{
     const rF = $("#replyForm");
     const rT =  $("#replyToggle");
     rF.hide();
-    rT.click(function (){
+    document.getElementById("replyToggle").onclick = ()=>{
         if(rF.is(":visible")){
             rT.text("Reply");
             rF.slideUp(500);
@@ -37,8 +37,7 @@ const replyForm = ()=>{
             rT.text("Hide");
             rF.slideDown(500);
         }
-
-    })
+    }
 }
 
 function main(){
