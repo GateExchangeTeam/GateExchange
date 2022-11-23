@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag "posts", "data-turbo-track": "reload" %>
 <div class="container-fluid" id="posts-show-container">
   <div class="card">
-    <%= render 'layouts/card_header', uname:@post.id %>
+    <%= render 'layouts/card_header', uname:@post.id, date:@post.created_at %>
     <div class="card-body">
       <h5 class="card-title">
         <%= @post.title %>

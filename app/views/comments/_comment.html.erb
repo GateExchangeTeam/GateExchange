@@ -1,6 +1,6 @@
 <li class="list-group-item border-0 comment-bg">
   <div class="card bg-light bg-gradient text-dark card-shadow">
-    <%= render 'layouts/card_header', uname:comment.id %>
+    <%= render 'layouts/card_header', uname:comment.id, date:comment.created_at %>
     <div class="card-body">
       <div class="container-fluid">
         <div class="row">

@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="card card-shadow">
-      <%= render 'layouts/card_header', uname:post.id %>
+      <%= render 'layouts/card_header', uname:post.id, date:post.created_at %>
       <div class="card-body">
         <h5 class="card-title"><%= post.title %></h5>
         <% if local_assigns[:all_courses] %>
