@@ -6,11 +6,11 @@ class PostsController < ApplicationController
   def index
     @course = Course.find(params[:course_id])
     @id = params[:course_id]
-    @posts = @course.posts
+    @posts = @course.posts.all.with_rich_text_content_and_embeds
   end
 
   def all
-    @posts = Post.all
+    @posts = Post.all.with_rich_text_content_and_embeds
     render 'posts/all'
   end
 

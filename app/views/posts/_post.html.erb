@@ -3,24 +3,39 @@
     <div class="card card-shadow">
       <%= render 'layouts/card_header', uname:post.id, date:post.created_at %>
       <div class="card-body">
-        <h5 class="card-title"><%= post.title %></h5>
-        <% if local_assigns[:all_courses] %>
-          <h6 class="card-subtitle mb-2 text-muted">
-            Asked in <a href=<%= course_posts_path(post.course.id) %>><%= post.course.title %></a>
-          </h6>
-      <% end %>
-        <br>
-        <% if post.content.id.nil? %>
-          <p class="card-text"><%=  truncate(post.description, length: 280, separator: ' ') %></p>
-        <% else %>
-          <p class="card-text"><%= truncate(strip_tags(post.content.to_s), length: 280, :escape => false) %></p>
-        <% end %>
-        <br>
-
-
-        <a href="<%= course_post_path(post.course.id, post.id) %>" class="btn btn-success">View details</a>
-        <button class="btn btn-warning disabled"><%= post.view %> views &nbsp; <i class="fa fa-eye"></i> </button>
-        <button class="btn btn-primary disabled"><%= post.comments.count %> comments &nbsp; <i class="fa-solid fa-message"></i> </button>
+        <div class="container">
+          <div class="row">
+            <div class="col-9">
+              <h5 class="card-title"><%= post.title %></h5>
+              <% if local_assigns[:all_courses] %>
+                <h6 class="card-subtitle mb-2 text-muted">
+                  Asked in <a href=<%= course_posts_path(post.course.id) %>><%= post.course.title %></a>
+                </h6>
+              <% end %>
+              <br>
+              <% if post.content.id.nil? %>
+                <p class="card-text"><%=  truncate(post.description, length: 280, separator: ' ') %></p>
+              <% else %>
+                <p class="card-text"><%= truncate(strip_tags(post.content.to_s), length: 280, :escape => false) %></p>
+              <% end %>
+             </div>
+            <div class="col-3">
+              <% unless post.content.embeds.empty? %>
+                <a href="javascript:void(0)" class="ripple">
+                  <%= image_tag post.content.embeds.find{|embeds| embeds.image?}.variant(resize_to_limit: [300, 300]), :class => "card-img" %>
+                </a>
+                <% end %>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col">
+              <a href="<%= course_post_path(post.course.id, post.id) %>" class="btn btn-success">View details</a>
+              <button class="btn btn-warning disabled"><%= post.view %> views &nbsp; <i class="fa fa-eye"></i> </button>
+              <button class="btn btn-primary disabled"><%= post.comments.count %> comments &nbsp; <i class="fa-solid fa-message"></i> </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
