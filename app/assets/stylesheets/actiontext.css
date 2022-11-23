@@ -28,7 +28,7 @@
   max-width: 100% !important;
 }
 .trix-button-group--file-tools{
-  display: none !important; /*TODO: Fix image uploading and unhide the file upload button*/
+  /*display: none !important; */
 }
 trix-editor{
   padding-top: 2em !important;
