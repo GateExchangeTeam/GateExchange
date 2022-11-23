@@ -20,10 +20,6 @@ const trimComments = ()=>{
     });
 }
 
-const trixFormFixer = ()=>{
-    $("#trix-toolbar-1").appendTo($("#toolbar-container"));
-}
-
 const replyForm = ()=>{
     const rF = $("#replyForm");
     const rT =  $("#replyToggle");
@@ -42,7 +38,6 @@ const replyForm = ()=>{
 
 function main(){
     trimComments();
-    trixFormFixer();
     replyForm();
 }
 
