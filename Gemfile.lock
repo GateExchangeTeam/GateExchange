@@ -133,6 +133,7 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     json (2.6.2)
+    local_time (2.1.0)
     loofah (2.19.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -305,6 +306,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
+  local_time
   pg
   puma (~> 5.0)
   rails (~> 7.0.4)

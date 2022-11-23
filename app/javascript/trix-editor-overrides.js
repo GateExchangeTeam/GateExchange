@@ -1,5 +1,5 @@
 window.addEventListener("trix-file-accept", function(event) {
-    const acceptedTypes = ['image/jpeg', 'image/png'];
+    const acceptedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
     const maxFileSize = 1024 * 1024; // 1MB
 
     if (!acceptedTypes.includes(event.file.type)) {

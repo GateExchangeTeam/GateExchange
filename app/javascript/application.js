@@ -2,6 +2,10 @@
 import "trix"
 import "@rails/actiontext"
 import "trix-editor-overrides"
+import LocalTime from "local-time"
+
+LocalTime.start()
+
 $(function() {
     setTimeout(function(){
         $('.flash-messages').slideUp(500); // Remove flash messages after a second
