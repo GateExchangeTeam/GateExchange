@@ -23,7 +23,7 @@
 
   <div class="main-content">
     <% @color = 0 %>
-    <% @colors = %w[green yellow blue black red] %>
+    <% @colors = %w[red green yellow blue black].shuffle %>
     <% @courses.each do |c| %>
       <div class="palette__wrapper">
         <%= render "palette",
