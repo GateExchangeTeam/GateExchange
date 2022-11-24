@@ -8,22 +8,23 @@
   </div>
 
   <div class="main-content">
-    <%= render "palette",
-               color:"maroon",
-               class_code:"all",
-               views: @num_views,
-               posts:@num_posts,
-               comments:@num_comments,
-               c_link: posts_path,
-               class_name: "All posts",
-               class_desc: "View all the posts on our site" %>
+    <div class="palette__wrapper">
+      <%= render "palette",
+                 color:"maroon",
+                 class_code:"all",
+                 views: @num_views,
+                 posts:@num_posts,
+                 comments:@num_comments,
+                 c_link: posts_path,
+                 class_name: "All posts",
+                 class_desc: "View all the posts on our site" %>
+    </div>
   </div>
 
   <div class="main-content">
     <% @color = 0 %>
     <% @colors = %w[green yellow blue black red] %>
     <% @courses.each do |c| %>
-
       <div class="palette__wrapper">
         <%= render "palette",
                    color:@colors[@color],
@@ -36,7 +37,7 @@
                    class_desc: c.description %>
       </div>
 
-      <% if@color == @colors.length %>
+      <% if @color == @colors.length-1 %>
         <% @color = 0 %>
       <% else %>
         <% @color += 1 %>
@@ -44,5 +45,7 @@
     <% end %>
   </div>
 </div>
+
+<div id="anim"></div>
 
 <%= javascript_include_tag 'courses', :cache => true %>

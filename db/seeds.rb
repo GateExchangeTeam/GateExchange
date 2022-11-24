@@ -19,6 +19,12 @@ Course.create!(title: 'Microeconomics', course_code: '251', description: 'Requir
                faculty: 'Haines')
 Course.create!(title: 'Is the Planet Doomed?', course_code: '107', description: 'Fun Geography course', department: 'GEOG',
                faculty: 'Hamlin')
+Course.create!(title: 'Modern South Asia', course_code: '269', description: 'Interesting history class', department: 'HIST',
+               faculty: 'Begum')
+Course.create!(title: 'Sociology of Disasters', course_code: '304', description: 'Cool sociology course', department: 'SOCI',
+               faculty: 'Villarrubia')
+Course.create!(title: 'Gadgets and Gizmos', course_code: '203', description: 'Another awesome comp sci class', department: 'COSC',
+               faculty: 'Apthorpe and Sommers')
 
 Post.delete_all
 

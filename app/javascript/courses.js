@@ -1,22 +1,28 @@
+function scrollTo(target,duration){
+    $('html, body').animate({
+        scrollTop: target.offset().top
+    }, duration);
+}
 function animateCourses(){
     let urlParams = new URLSearchParams(window.location.search);
     if(urlParams.has("animate")){
-        let palette = $(".palette");
+        let courses = $(".palette__wrapper");
 
-        palette.each(function (){
+        courses.each(function (){
             $(this).hide();
         });
 
-        palette.each(function (index){
-            let pal = $(this);
+        courses.each(function (index){
+            let course = $(this);
             setTimeout(function (){
-                pal.fadeIn(400);
-            },100+(index*350))
+                course.fadeIn(400);
+                scrollTo(course,100);
+            },100+(index*450))
         });
     }
 }
 document.onreadystatechange = () => {
     if (document.readyState === "complete") {
-       animateCourses();
+        animateCourses();
     }
 };
