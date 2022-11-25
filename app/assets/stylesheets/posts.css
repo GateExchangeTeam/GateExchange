@@ -29,3 +29,12 @@ body{
 .card-shadow:hover{
     box-shadow: 5px 7px var(--mdb-gray-300);
 }
+.timestamp{
+    font-size: .85rem;
+    opacity: 85%;
+    transition: opacity 200ms ease-in;
+    cursor: pointer;
+}
+.timestamp:hover{
+    opacity: 100%;
+}

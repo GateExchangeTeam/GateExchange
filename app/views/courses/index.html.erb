@@ -8,7 +8,6 @@
   </div>
 
   <div class="main-content">
-    <div class="palette__wrapper">
       <%= render "palette",
                  color:"maroon",
                  class_code:"all",
@@ -18,14 +17,13 @@
                  c_link: posts_path,
                  class_name: "All posts",
                  class_desc: "View all the posts on our site" %>
-    </div>
   </div>
 
   <div class="main-content">
     <% @color = 0 %>
     <% @colors = %w[red green yellow blue black].shuffle %>
     <% @courses.each do |c| %>
-      <div class="palette__wrapper">
+
         <%= render "palette",
                    color:@colors[@color],
                    class_code:c.generate_full_code,
@@ -35,7 +33,7 @@
                    c_link: course_posts_path(c.id),
                    class_name: c.title,
                    class_desc: c.description %>
-      </div>
+
 
       <% if @color == @colors.length-1 %>
         <% @color = 0 %>
@@ -45,7 +43,5 @@
     <% end %>
   </div>
 </div>
-
-<div id="anim"></div>
 
 <%= javascript_include_tag 'courses', :cache => true %>

@@ -21,9 +21,12 @@
              </div>
             <div class="col-3">
               <% unless post.content.embeds.empty? %>
-                <a href="javascript:void(0)" class="ripple">
-                  <%= image_tag post.content.embeds.find{|embeds| embeds.image?}.variant(resize_to_limit: [300, 300]), :class => "card-img" %>
-                </a>
+                <% embed = post.content.embeds.first %>
+                <% image = embed.variant(resize_to_limit: [300, 300]) %>
+                <% caption = embed.blob.attachable_plain_text_representation.gsub(/(^\[)|(\]$)/,'') %>
+                <div class="ripple">
+                  <%= image_tag image, :class => "card-img", :alt=>caption %>
+                </div>
                 <% end %>
             </div>
           </div>

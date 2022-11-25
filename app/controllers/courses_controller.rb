@@ -13,6 +13,8 @@ class CoursesController < ApplicationController
     @num_comments = 0
     @courses.each { |c| @num_comments += c.comments.count }
 
+    @animate = params.key? 'animate'
+
     render 'index'
   end
 end

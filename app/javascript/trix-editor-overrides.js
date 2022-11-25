@@ -4,7 +4,7 @@ window.addEventListener("trix-file-accept", function(event) {
 
     if (!acceptedTypes.includes(event.file.type)) {
         event.preventDefault();
-        alert("Only support attachment of jpeg or png files");
+        alert("Only support attachment of jpg, jpeg or png files");
     }
     else if (event.file.size > maxFileSize) {
         event.preventDefault();
