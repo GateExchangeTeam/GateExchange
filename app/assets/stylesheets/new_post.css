@@ -1,0 +1,24 @@
+body{
+    background-color: #f7f5f5;
+    opacity: 1;
+    background-image: radial-gradient(#f74581 0.45px, #f7f5f5 0.45px);
+    background-size: 9px 9px;
+}
+.form-control{
+    background-clip: padding-box !important;
+    background-color: white !important;
+}
+.rte>.form-control{
+    border: 0.5px solid var(--mdb-gray) !important;
+}
+.rte>.form-label{
+    background-clip: padding-box !important;
+    background-color: white !important;
+    margin: 1px;
+    padding: 0 !important;
+    padding-left: 1px !important;
+    padding-right: 1px !important;
+}
+.trix-button{
+    background-color: white !important;
+}

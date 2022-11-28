@@ -1,57 +1,33 @@
-<!--<div>-->
-<!--#TODO put some info about the question/post up here with comments below-->
-<!--<h1> Comments for this question </h1>-->
-
-
-<!-- <h2><%#= link_to "Comment", new_course_post_comment_path(@course_id, @post_id) %></h2>-->
-<!--</div>-->
-
-<div class="container-fluid">
-
+<%= stylesheet_link_tag "posts", "data-turbo-track": "reload" %>
+<div class="container-fluid" id="posts-show-container">
   <div class="card">
+    <%= render 'layouts/card_header', uname:@post.id, date:@post.created_at %>
     <div class="card-body">
       <h5 class="card-title">
         <%= @post.title %>
       </h5>
       <h6 class="card-subtitle mb-2 text-muted">Asked in <a href=<%= course_posts_path(@post.course.id) %> class="card-link"><%= @post.course.title %></a></h6>
-      <p class="card-text">
-        <%= @post.description %>
-      </p>
-      <a href="<%= new_course_post_comment_path(@course_id, @post_id) %>" class="card-link">Reply</a>
+      <%= render 'content' %>
+
+      <a href="javascript:void(0)" id="replyToggle" class="card-link">Reply</a>
+      <%= render 'comments/form' %>
+
     </div>
-
-    <div class="card-footer">
-
+    <div class="card-footer comment-bg">
       <% if @comments.count > 0%>
-
         <ul class="list-group list-group-flush">
-
-          <% @comments.each do |c| %>
-
-            <li class="list-group-item"><%= c.text_body %></li>
-
-          <% end %>
-
+          <%= render @comments %>
         </ul>
-
-
       <% else%>
         <p>
-
           <em class="text-success">
             Be the first one to answer this question
           </em>
-
         </p>
-
       <% end%>
-
     </div>
-
-
   </div>
-
   <br>
   <%= link_to("Back to course", course_posts_path(@course_id), :class => "btn btn-primary")%>
-
 </div>
+<%= javascript_include_tag 'show_post', :cache => true %>

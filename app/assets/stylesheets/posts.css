@@ -1,0 +1,40 @@
+body{
+    background-color: var(--mdb-dark) !important;
+}
+.comment-bg{
+    background-color: #4a4343;
+}
+#posts-show-container{
+    padding: 1em;
+}
+#posts-index-header{
+   padding-top: 2rem;
+}
+#question-btn-container{
+    padding-right: 3.5em;
+}
+.card-subtitle.mb-2.text-muted{
+    margin-top: 0.5rem !important;
+    margin-bottom: 1rem !important;
+}
+.comment-header .comment-pfp{
+    margin-right: 1em;
+}
+.comment-uname.badge{
+    padding: 0.7em;
+}
+.card-shadow{
+    transition: box-shadow 350ms ease-in-out;
+}
+.card-shadow:hover{
+    box-shadow: 5px 7px var(--mdb-gray-300);
+}
+.timestamp{
+    font-size: .85rem;
+    opacity: 85%;
+    transition: opacity 200ms ease-in;
+    cursor: pointer;
+}
+.timestamp:hover{
+    opacity: 100%;
+}

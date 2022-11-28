@@ -1,0 +1,166 @@
+body{
+    background-color: #ffffff;
+    background-image: radial-gradient(#444cf7 0.5px, #ffffff 0.5px);
+    background-size: 10px 10px;
+}
+.main-content h4 {
+    width: 100%;
+    margin: 2em auto 0;
+    font-size: 20px;
+    text-align: center;
+}
+
+.main-content h4.note {
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+}
+
+.main-content h4 small {
+    text-transform: uppercase;
+    display: block;
+    margin: 10px 0;
+    font: 300 15px "QuickSand", sans-serif;
+    font-weight: bold;
+    color: black;
+}
+
+.main-content {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 3em auto 0;
+    max-width: 1000px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.palette__wrapper {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.palette {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    display: inline-block;
+    perspective: 800px;
+}
+.palette__cover {
+    border-radius: 6px;
+    width: inherit;
+    height: inherit;
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    transition: 0.3s ease;
+    transform-origin: top left;
+    font: 900 28px/0.9 "Poppins", sans-serif;
+    text-transform: uppercase;
+    color: #fff;
+    overflow: hidden;
+}
+.palette__cover__border {
+    width: 80%;
+    height: 80%;
+    border: 7px solid #fff;
+    margin: 10%;
+}
+.palette__cover span {
+    display: inline-block;
+    position: absolute;
+    bottom: 7.5px;
+    left: 10px;
+    padding: 10px;
+    max-width: 50%;
+}
+
+.palette:hover .palette__cover {
+    transform: rotateX(80deg);
+}
+
+@keyframes startTransition {
+    0% {
+        opacity: 0;
+        top: 200px;
+        transform: scale(0.5);
+        height: 0;
+    }
+    40% {
+        opacity: 1;
+    }
+    100% {
+        top: 22px;
+        opacity: 1;
+        transform: scale(1);
+        height: 15px;
+        box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.palette--yellow .palette__cover {
+    background: #ffc303;
+}
+
+.palette--yellow .palette__cover span {
+    max-width: 50%;
+    background: #ffc303;
+}
+
+
+.palette--red .palette__cover {
+    background: #ee4266;
+}
+
+.palette--red .palette__cover span {
+    max-width: 62%;
+    background: #ee4266;
+}
+
+
+.palette--blue .palette__cover {
+    background: #0075c4;
+}
+
+.palette--blue .palette__cover span {
+    max-width: 48%;
+    background: #0075c4;
+}
+
+
+.palette--black .palette__cover {
+    background: #2a2e45;
+}
+
+.palette--black .palette__cover span {
+    max-width: 59%;
+    background: #2a2e45;
+}
+
+.palette--maroon .palette__cover {
+    background: maroon;
+}
+
+.palette--maroon .palette__cover span {
+    max-width: 59%;
+    background: maroon;
+}
+
+.palette--green .palette__cover {
+    background: var(--mdb-success);
+}
+
+.palette--green .palette__cover span {
+    max-width: 59%;
+    background: var(--mdb-success);
+}
+.note{
+    transition: transform 175ms ease-in;
+    font-weight: bold;
+}
+.note:hover{
+    transform: scale(1.1);
+}

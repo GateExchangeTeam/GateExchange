@@ -1,3 +1,12 @@
+body{
+  margin: 0 !important;
+  border: 0;
+  padding: 0;
+}
+#courses-container{
+  padding-left: 0;
+  padding-right: 0;
+}
 .header-partial a {
   color: maroon;
   text-decoration: none; 

@@ -1,0 +1,31 @@
+<li class="list-group-item border-0 comment-bg">
+  <div class="card bg-light bg-gradient text-dark card-shadow">
+    <%= render 'layouts/card_header', uname:comment.id, date:comment.created_at %>
+    <div class="card-body">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-11">
+            <div class="card-text comment-text">
+              <%= comment.text_body %>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="row">
+              <button class="btn btn-success hover-overlay ripple rounded-9">
+                <i class="fa-solid fa-thumbs-up"></i>
+              </button>
+            </div>
+
+            <br>
+
+            <div class="row">
+              <button class="btn btn-danger hover-overlay ripple rounded-9">
+                <i class="fa-solid fa-thumbs-down"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>

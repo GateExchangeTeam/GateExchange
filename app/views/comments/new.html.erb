@@ -1,9 +1,0 @@
-<h1> Write a reply </h1> 
-<%= form_with model: @comment, url: course_post_comments_path(@course_id, @post_id), method: :post, local: true do |comment_form|%>
-    <%= comment_form.label :Reply %>
-    <%= comment_form.text_field :text_body %>
-
-    <%= comment_form.submit "Reply" %>
-  <% end %>
-<br>
-<%= link_to("Back to the post", course_post_path(@course_id,@post_id), :class => "btn btn-primary")%>

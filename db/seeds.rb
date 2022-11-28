@@ -19,23 +19,29 @@ Course.create!(title: 'Microeconomics', course_code: '251', description: 'Requir
                faculty: 'Haines')
 Course.create!(title: 'Is the Planet Doomed?', course_code: '107', description: 'Fun Geography course', department: 'GEOG',
                faculty: 'Hamlin')
+Course.create!(title: 'Modern South Asia', course_code: '269', description: 'Interesting history class', department: 'HIST',
+               faculty: 'Begum')
+Course.create!(title: 'Sociology of Disasters', course_code: '304', description: 'Cool sociology course', department: 'SOCI',
+               faculty: 'Villarrubia')
+Course.create!(title: 'Gadgets and Gizmos', course_code: '203', description: 'Another awesome comp sci class', department: 'COSC',
+               faculty: 'Apthorpe and Sommers')
 
 Post.delete_all
 
 p1 = c.posts.create!(title: 'uninitialized constant when including validator',
-                description: 'I have the following file /app/validators/hex_color.rb in my Rails app but I got an error', view: 0)
+                     description: 'I have the following file /app/validators/hex_color.rb in my Rails app but I got an error', view: 0)
 p2 = c.posts.create!(title: 'Rotating an image using cImage',
-                description: "I'm trying to rotate an image in Python by 90 degrees using cImage (and only cImage) and here's what I've got so far.", view: 0)
+                     description: "I'm trying to rotate an image in Python by 90 degrees using cImage (and only cImage) and here's what I've got so far.", view: 0)
 p3 = c.posts.create!(title: 'Prefix number with + if it is positive - Ruby / Rails 4',
-                description: 'I am wondering what the conventional Rails way AND Ruby way is to prepend a  sybmol to a number if it is positive.', view: 0)
+                     description: 'I am wondering what the conventional Rails way AND Ruby way is to prepend a  sybmol to a number if it is positive.', view: 0)
 p4 = c.posts.create!(title: 'Sort hash by key, return hash in Ruby',
-                description: 'Would this be the best way to sort a hash and return Hash object (instead of Array):', view: 0)
+                     description: 'Would this be the best way to sort a hash and return Hash object (instead of Array):', view: 0)
 p5 = c1.posts.create!(title: 'How to check if a value exists in an array in Ruby',
-                 description: "I have a value 'Dog' and an array ['Cat', 'Dog', 'Bird'].", view: 0)
+                      description: "I have a value 'Dog' and an array ['Cat', 'Dog', 'Bird'].", view: 0)
 p6 = c1.posts.create!(title: 'Navbar fixed on the top of HTML page (CSS / HTML)',
-                 description: "I'm trying to learn some of CSS3 and HTML5 but I'm a little confused with somethings. For now, I want create a page with a fixed navbar on the top of page, that scrolls with the page.", view: 0)
+                      description: "I'm trying to learn some of CSS3 and HTML5 but I'm a little confused with somethings. For now, I want create a page with a fixed navbar on the top of page, that scrolls with the page.", view: 0)
 
-p1.comments.create!(text_body: "This might fix your problem")
-p1.comments.create!(text_body: "I have the same issue")
-p1.comments.create!(text_body: "Waiting here for someone to fix this issue")
-p1.comments.create!(text_body: "Try this solution: ........")
+p1.comments.create!(text_body: 'This might fix your problem')
+p1.comments.create!(text_body: 'I have the same issue')
+p1.comments.create!(text_body: 'Waiting here for someone to fix this issue')
+p1.comments.create!(text_body: 'Try this solution: ........')

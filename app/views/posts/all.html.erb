@@ -1,0 +1,15 @@
+<%= stylesheet_link_tag "posts", "data-turbo-track": "reload" %>
+<div class="container-fluid bg-dark text-dark">
+  <div class="row">
+    <div class="col-md-12" id="posts-index-header">
+      <div class="text-center text-light">
+        <h1> All posts </h1>
+        <br>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <%= render @posts, all_courses: true %>
+  </div>
+</div>
