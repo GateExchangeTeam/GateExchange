@@ -9,18 +9,18 @@
   <%= form_with model: @post, url: course_posts_path(@id), method: :post, local: true do |post_form| %>
 
     <div class="form-outline mb-4">
-      <%= post_form.text_field :title, :class => "form-control", :id=>"form4Example3", :autocomplete=>"off"  %>
+        <%= post_form.text_field :title, :class => "form-control", :id=>"form4Example3", :autocomplete=>"off"  %>
       <label class="form-label" for="form4Example3">Title</label>
     </div>
 
     <div class="form-outline mb-4" id="toolbar-container"></div>
 
     <div class="form-outline mb-4 rte">
-      <%= post_form.rich_text_area :content, :rows=>"4", :class=>"form-control" %>
+      <%= post_form.rich_text_area :content, :rows=>"4", :class=>"form-control", :id=>"description-title" %>
       <%= post_form.label :content, "Description", :class=>"form-label" %>
     </div>
 
-    <button type="submit" class="btn btn-success btn-block mb-4">Submit</button>
+    <button type="submit", id = "submit-new", class="btn btn-success btn-block mb-4">Submit</button>
   <% end %>
   <br>
   <%= link_to("Back to posts", course_posts_path, :class => "btn btn-primary")%>
