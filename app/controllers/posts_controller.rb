@@ -6,7 +6,19 @@ class PostsController < ApplicationController
   def index
     @course = Course.find(params[:course_id])
     @id = params[:course_id]
-    @posts = @course.posts.all.with_rich_text_content_and_embeds
+
+    if params[:sort] != nil
+      sort = params[:sort]
+      if sort == "views"
+        @posts = @course.posts.order(views: :desc).with_rich_text_content_and_embeds
+      elsif sort == "ratings"
+        @posts = @course.posts.order(ratings: :desc).with_rich_text_content_and_embeds
+      else
+        @posts = @course.posts.all.with_rich_text_content_and_embeds.order("comments_count DESC")
+      end 
+    else
+      @posts = @course.posts.all.with_rich_text_content_and_embeds
+    end 
   end
 
   def all
