@@ -7,22 +7,35 @@ class PostsController < ApplicationController
     @course = Course.find(params[:course_id])
     @id = params[:course_id]
 
-    if params[:sort] != nil
+    if !params[:sort].nil?
       sort = params[:sort]
-      if sort == "views"
-        @posts = @course.posts.order(views: :desc).with_rich_text_content_and_embeds
-      elsif sort == "ratings"
-        @posts = @course.posts.all.with_rich_text_content_and_embeds.order("ratings_count DESC")
-      else
-        @posts = @course.posts.all.with_rich_text_content_and_embeds.order("comments_count DESC")
-      end 
+      @posts = case sort
+               when 'views'
+                 @course.posts.order(view: :desc).with_rich_text_content_and_embeds
+               when 'ratings'
+                 @course.posts.all.with_rich_text_content_and_embeds.order('ratings_count DESC')
+               else
+                 @course.posts.all.with_rich_text_content_and_embeds.order('comments_count DESC')
+               end
     else
       @posts = @course.posts.all.with_rich_text_content_and_embeds
-    end 
+    end
   end
 
   def all
-    @posts = Post.all.with_rich_text_content_and_embeds
+    if !params[:sort].nil?
+      sort = params[:sort]
+      @posts = case sort
+               when 'views'
+                 Post.order(view: :desc).with_rich_text_content_and_embeds
+               when 'ratings'
+                 Post.all.with_rich_text_content_and_embeds.order('ratings_count DESC')
+               else
+                 Post.all.with_rich_text_content_and_embeds.order('comments_count DESC')
+               end
+    else
+      @posts = Post.all.with_rich_text_content_and_embeds
+    end
     render 'posts/all'
   end
 
