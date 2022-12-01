@@ -12,7 +12,7 @@ class PostsController < ApplicationController
       if sort == "views"
         @posts = @course.posts.order(views: :desc).with_rich_text_content_and_embeds
       elsif sort == "ratings"
-        @posts = @course.posts.order(ratings: :desc).with_rich_text_content_and_embeds
+        @posts = @course.posts.all.with_rich_text_content_and_embeds.order("ratings_count DESC")
       else
         @posts = @course.posts.all.with_rich_text_content_and_embeds.order("comments_count DESC")
       end 
