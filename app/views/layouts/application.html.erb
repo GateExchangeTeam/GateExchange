@@ -36,6 +36,32 @@
         <h1 class="navbar-brand">
           <%=link_to "GateExchange", courses_path%>
         </h1>
+        <% if @course != nil %>
+          <% if current_page?(course_posts_path(@course.id))%>
+            <div class = "navbar-nav me-auto mb-2 mb-lg-0">
+              <div class="dropdown">
+              <button class="btn btn-outline-success">Filter Posts</button>
+              <div class="dropdown-content">
+                <%=link_to "Comments", course_posts_path(@course.id, :sort => "comments")%>
+                <%=link_to "Highest Rated", course_posts_path(@course.id, :sort => "ratings")%>
+                <%=link_to "Most Viewed", course_posts_path(@course.id,  :sort => "views")%>
+              </div>
+              </div>
+          </div>
+          <% end %>
+        <% end %>
+        <% if current_page?(posts_path)%>
+            <div class = "navbar-nav me-auto mb-2 mb-lg-0">
+              <div class="dropdown">
+              <button class="btn btn-outline-success">Filter Posts</button>
+              <div class="dropdown-content">
+                <%=link_to "Comments", posts_path(:sort => "comments")%>
+                <%=link_to "Highest Rated", posts_path(:sort => "ratings")%>
+                <%=link_to "Most Viewed", posts_path(:sort => "views")%>
+              </div>
+              </div>
+          </div>
+        <% end %>
         <form role="search" class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>

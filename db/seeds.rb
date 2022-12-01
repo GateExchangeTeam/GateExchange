@@ -29,11 +29,11 @@ Course.create!(title: 'Gadgets and Gizmos', course_code: '203', description: 'An
 Post.delete_all
 
 p1 = c.posts.create!(title: 'uninitialized constant when including validator',
-                     description: 'I have the following file /app/validators/hex_color.rb in my Rails app but I got an error', view: 0)
+                     description: 'I have the following file /app/validators/hex_color.rb in my Rails app but I got an error', view: 10)
 p2 = c.posts.create!(title: 'Rotating an image using cImage',
-                     description: "I'm trying to rotate an image in Python by 90 degrees using cImage (and only cImage) and here's what I've got so far.", view: 0)
+                     description: "I'm trying to rotate an image in Python by 90 degrees using cImage (and only cImage) and here's what I've got so far.", view: 3)
 p3 = c.posts.create!(title: 'Prefix number with + if it is positive - Ruby / Rails 4',
-                     description: 'I am wondering what the conventional Rails way AND Ruby way is to prepend a  sybmol to a number if it is positive.', view: 0)
+                     description: 'I am wondering what the conventional Rails way AND Ruby way is to prepend a  sybmol to a number if it is positive.', view: 4)
 p4 = c.posts.create!(title: 'Sort hash by key, return hash in Ruby',
                      description: 'Would this be the best way to sort a hash and return Hash object (instead of Array):', view: 0)
 p5 = c1.posts.create!(title: 'How to check if a value exists in an array in Ruby',
@@ -45,3 +45,4 @@ p1.comments.create!(text_body: 'This might fix your problem')
 p1.comments.create!(text_body: 'I have the same issue')
 p1.comments.create!(text_body: 'Waiting here for someone to fix this issue')
 p1.comments.create!(text_body: 'Try this solution: ........')
+p1.ratings.create!(up: 3, down: 4)
