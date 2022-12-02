@@ -41,8 +41,8 @@ p5 = c1.posts.create!(title: 'How to check if a value exists in an array in Ruby
 p6 = c1.posts.create!(title: 'Navbar fixed on the top of HTML page (CSS / HTML)',
                       description: "I'm trying to learn some of CSS3 and HTML5 but I'm a little confused with somethings. For now, I want create a page with a fixed navbar on the top of page, that scrolls with the page.", view: 0)
 
-p1.comments.create!(text_body: 'This might fix your problem')
-p1.comments.create!(text_body: 'I have the same issue')
-p1.comments.create!(text_body: 'Waiting here for someone to fix this issue')
-p1.comments.create!(text_body: 'Try this solution: ........')
-p1.ratings.create!(up: 3, down: 4)
+# p1.comments.create!(text_body: 'This might fix your problem')
+# p1.comments.create!(text_body: 'I have the same issue')
+# p1.comments.create!(text_body: 'Waiting here for someone to fix this issue')
+# p1.comments.create!(text_body: 'Try this solution: ........')
+# p1.ratings.create!(up: 3, down: 4)
