@@ -23,12 +23,7 @@ body{
 .comment-uname.badge{
     padding: 0.7em;
 }
-.card-shadow{
-    transition: box-shadow 350ms ease-in-out;
-}
-.card-shadow:hover{
-    box-shadow: 5px 7px var(--mdb-gray-300);
-}
+
 .timestamp{
     font-size: .85rem;
     opacity: 85%;

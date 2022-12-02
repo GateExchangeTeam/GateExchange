@@ -35,7 +35,7 @@
             <div class="col">
               <a href="<%= course_post_path(post.course.id, post.id) %>" class="btn btn-success">View details</a>
               <button class="btn btn-warning disabled"><%= post.view %> views &nbsp; <i class="fa fa-eye"></i> </button>
-              <button class="btn btn-primary disabled"><%= post.comments.count %> comments &nbsp; <i class="fa-solid fa-message"></i> </button>
+              <button class="btn btn-primary disabled"><%= post.replies.count %> replies &nbsp; <i class="fa-solid fa-message"></i> </button>
             </div>
           </div>
         </div>

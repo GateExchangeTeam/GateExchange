@@ -1,0 +1,39 @@
+<li class="list-group-item border-0 comment-bg">
+  <div class="card bg-light bg-gradient text-dark card-shadow">
+    <%= render 'layouts/card_header', uname:reply.id, date:reply.created_at %>
+    <div class="card-body">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-11">
+            <div class="card-text comment-text">
+              <%= reply.body %>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="row">
+              <button class="btn btn-success hover-overlay ripple rounded-9">
+                <i class="fa-solid fa-thumbs-up"></i>
+              </button>
+            </div>
+            <br>
+            <div class="row">
+              <button class="btn btn-danger hover-overlay ripple rounded-9">
+                <i class="fa-solid fa-thumbs-down"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-light">
+      <ul class="list-group list-group-flush">
+        <%= render partial: "replies/reply", collection: reply.replies %>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <a href="javascript:void(0)" id="replyToggle" class="card-link">Reply</a>
+      <%= render 'replies/form', replyTo:reply, url: course_post_reply_replies_path(:post_id=>@post_id, :reply_id=>reply.id) %>
+    </div>
+  </div>
+</li>

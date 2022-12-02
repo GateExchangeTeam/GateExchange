@@ -3,13 +3,16 @@
 Rails.application.routes.draw do
   root 'landing#index'
   get '/posts', to: 'posts#all'
+
   resources :tags
 
   resources :courses do
     resources :posts do
-      resources :comments, except: :new do
-        resources :nested_comments
+      resources :replies do
+        resources :replies
       end
     end
   end
+
+
 end

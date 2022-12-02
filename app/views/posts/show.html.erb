@@ -6,17 +6,17 @@
       <h5 class="card-title">
         <%= @post.title %>
       </h5>
-      <h6 class="card-subtitle mb-2 text-muted">Asked in <a href=<%= course_posts_path(@post.course.id) %> class="card-link"><%= @post.course.title %></a></h6>
+      <h6 class="card-subtitle mb-2 text-muted">Asked in <a class="card-link" href=<%= course_posts_path(@post.course.id)%>><%= @post.course.title %></a></h6>
       <%= render 'content' %>
 
       <a href="javascript:void(0)" id="replyToggle" class="card-link">Reply</a>
-      <%= render 'comments/form' %>
+      <%= render 'replies/form', replyTo:@post, url: course_post_replies_path(@course_id, @post_id) %>
 
     </div>
     <div class="card-footer comment-bg">
-      <% if @comments.count > 0%>
+      <% if @replies.count > 0%>
         <ul class="list-group list-group-flush">
-          <%= render @comments %>
+          <%= render partial: "replies/reply", collection: @post.replies %>
         </ul>
       <% else%>
         <p>

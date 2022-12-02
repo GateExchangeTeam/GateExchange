@@ -1,0 +1,10 @@
+<div class="container" id="replyForm">
+  <br>
+  <%= form_for [local_assigns[:replyTo], Reply.new], url: local_assigns[:url], method: :post, local: true do |reply_form|%>
+    <div class="form-outline mb-4">
+      <%= reply_form.text_area :body, :class => "form-control", :rows=>"4", :id=>"form4Example3"  %>
+      <label class="form-label" for="form4Example3">Message</label>
+    </div>
+    <button type="submit" id="replySubmit" class="btn btn-primary btn-block mb-4">Reply</button>
+  <% end %>
+</div>
