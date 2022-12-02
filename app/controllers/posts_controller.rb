@@ -15,7 +15,7 @@ class PostsController < ApplicationController
                when 'ratings'
                  @course.posts.all.with_rich_text_content_and_embeds.order('ratings_count DESC')
                else
-                 @course.posts.all.with_rich_text_content_and_embeds.order('comments_count DESC')
+                 @course.posts.all.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
                end
     else
       @posts = @course.posts.all.with_rich_text_content_and_embeds
