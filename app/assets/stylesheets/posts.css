@@ -87,6 +87,11 @@ body{
   /* Change the background color of the dropdown button when the dropdown content is shown */
   .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
+.comment {
+        border-left:4px solid rgba(0, 0, 0, 0.1);
+        padding: 10px;
+
+    }
 .link-muted { color: #aaa; }
 .link-muted:hover { color: #1266f1; }
 .link-muted:active { color: #1266f1; }

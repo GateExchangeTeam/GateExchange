@@ -1,4 +1,4 @@
-<div class="d-flex flex-start mt-4">
+<div class="d-flex flex-start mt-4 comment rounded-5 hover-shadow">
   <img class="rounded-circle bg-dark shadow-1-strong me-3"
        src="https://avatars.dicebear.com/api/bottts/<%= comment.id %>.svg"
        height="35"
@@ -33,6 +33,10 @@
         <% end %>
       </div>
     </div>
-    <%= render partial: "comments/comment", collection: comment.comments %>
+    <% if comment.comments.count > 0 %>
+      <%= render partial: "comments/comment", collection: comment.comments %>
+    <% end %>
+
+
   </div>
 </div>
