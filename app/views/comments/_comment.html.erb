@@ -9,7 +9,7 @@
     <div>
       <div class="d-flex justify-content-between align-items-center">
         <p class="mb-1">
-          User name <span class="small">~ </span>
+          User name <span class="small">~ <%= local_time comment.created_at %> </span>
         </p>
         <div class="d-flex">
             <% srand(comment.id) %>
