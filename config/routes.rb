@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :posts do
+      member do
+        get 'increase_rating'
+      end
       resources :comments, except: :new do
         resources :nested_comments
       end

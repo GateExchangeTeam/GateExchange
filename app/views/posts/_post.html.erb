@@ -5,6 +5,11 @@
       <div class="card-body">
         <div class="container">
           <div class="row">
+            <!--Create button for voting. -->
+            <div>
+              <%= pluralize(post.ratings.count, "Rating") %>
+              <%= button_to 'Upvote', increase_rating_course_post_path(post.course.id, post.id), method: :get %>
+            </div>
             <div class="col-9">
               <h5 class="card-title"><%= post.title %></h5>
               <% if local_assigns[:all_courses] %>

@@ -67,6 +67,28 @@ class PostsController < ApplicationController
     end
   end
 
+  # A method to increase the rating of a post.
+  # Creates a new rating object for a specific post.
+  # Then, reloads the page to see changes.
+  def increase_rating()
+    @post = Course.find(params[:course_id]).posts.find(params[:id])
+    @rating = @post.ratings.new
+    @rating.up = 1
+    @rating.down = 0
+
+    # TODO: Create event to handle case where someone clicks the button more than once.
+    #   First associate a rating with a user. Then use unique path to create and delete ratings.
+
+    if @rating.save
+      flash[:notice] = "Rating successfully added."
+      redirect_to course_posts_path() and return
+    else
+      flash[:warning] = "Issue creating rating."
+      redirect_to course_posts_path() and return
+    end
+  end
+
+
   private
 
   def create_params
