@@ -82,7 +82,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_031230) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "course_id"
-    t.integer "comments_count"
     t.integer "ratings_count"
     t.index ["course_id"], name: "index_posts_on_course_id"
   end

@@ -5,5 +5,4 @@ class Comment < ApplicationRecord
   has_many :ratings
   belongs_to :commentable, polymorphic: true
   has_many :comments, as: :commentable
-  has_many :nested_comments
 end

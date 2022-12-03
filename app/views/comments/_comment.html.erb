@@ -1,31 +1,38 @@
-<li class="list-group-item border-0 comment-bg">
-  <div class="card bg-light bg-gradient text-dark card-shadow">
-    <%= render 'layouts/card_header', uname:comment.id, date:comment.created_at %>
-    <div class="card-body">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-11">
-            <div class="card-text comment-text">
-              <%= comment.text_body %>
-            </div>
-          </div>
-          <div class="col-md-1">
-            <div class="row">
-              <button class="btn btn-success hover-overlay ripple rounded-9">
-                <i class="fa-solid fa-thumbs-up"></i>
-              </button>
-            </div>
-
-            <br>
-
-            <div class="row">
-              <button class="btn btn-danger hover-overlay ripple rounded-9">
-                <i class="fa-solid fa-thumbs-down"></i>
-              </button>
-            </div>
-          </div>
+<div class="d-flex flex-start mt-4">
+  <img class="rounded-circle bg-dark shadow-1-strong me-3"
+       src="https://avatars.dicebear.com/api/bottts/<%= comment.id %>.svg"
+       height="35"
+       alt="Robot"
+       loading="lazy"
+    />
+  <div class="flex-grow-1 flex-shrink-1">
+    <div>
+      <div class="d-flex justify-content-between align-items-center">
+        <p class="mb-1">
+          User name <span class="small">~ </span>
+        </p>
+        <div class="d-flex">
+            <% srand(comment.id) %>
+            <a role="button" class="link-muted me-3"><i class="fas fa-thumbs-up me-1"></i> <%= rand(100) %> </a>
+            <a role="button" class="link-muted me-3"><i class="fas fa-thumbs-down me-1"></i> <%= rand(100) %> </a>
+            <a data-mdb-toggle="collapse" href="#replyForm-<%= comment.id %>"><i class="fas fa-reply fa-xs"></i><span class="small"> reply</span></a>
         </div>
       </div>
+      <p class="small mb-0">
+        <%= comment.text_body %>
+      </p>
     </div>
+    <div class="collapse" id="replyForm-<%= comment.id %>">
+      <div class="form-outline w-100 mt-3">
+        <%= form_for [comment, Comment.new], url: course_post_comment_comments_path(:comment_id=>comment.id, :post_id=>@post_id) do |comment_form|%>
+          <div class="form-outline mb-4">
+            <%= comment_form.text_area :text_body, :class => "form-control", :rows=>"4", :id=>"form4Example3"  %>
+            <label class="form-label" for="form4Example3">Message</label>
+          </div>
+          <button type="submit" id="replySubmit" class="btn btn-primary btn-block mb-4">Reply</button>
+        <% end %>
+      </div>
+    </div>
+    <%= render partial: "comments/comment", collection: comment.comments %>
   </div>
-</li>
+</div>

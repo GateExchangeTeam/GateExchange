@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
+  before_action :find_commentable
   def create
     @course_id = params[:course_id]
     @post_id = params[:post_id]
-    @comment = Course.find(params[:course_id]).posts.find(params[:post_id]).comments.create(create_params)
-    if @comment.save
+    @commentable = @commentable.comments.new(create_params)
+
+    if @commentable.save
       flash[:notice] = 'Reply sent'
       redirect_to course_post_path(params[:course_id], params[:post_id])
     else
@@ -19,6 +21,14 @@ class CommentsController < ApplicationController
   private
 
   def create_params
-    params.require(:comment).permit(:text_body) # plus any other fields
+    params.require(:comment).permit(:text_body)
+  end
+
+  def find_commentable
+    @commentable = if params[:comment_id]
+                     Comment.find(params[:comment_id])
+                   else
+                     Post.find(params[:post_id])
+                   end
   end
 end

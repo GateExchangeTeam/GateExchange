@@ -12,11 +12,11 @@ RSpec.describe 'index page', type: :feature do
                    faculty: 'Joyce')
     Tag.create!(tag_name: 'academics')
     User.create!(name: 'itsjoyce', email: 'jzhang4@colgate.edu', passcode: 'testtest')
-    Post.create!(title: 'how to do homework 1',
+    p1 = Post.create!(title: 'how to do homework 1',
                  description: 'I have the following file /app/validators/hex_color.rb in my Rails app but I got an error', view: 0, course_id: 1)
-    Post.create!(title: 'grading', description: 'the professor is a easy grader', view: 0, course_id: 1)
-    Comment.create!(text_body: 'i also have question on hw1', post_id: 1)
-    Comment.create!(text_body: 'no, not a easy grader', post_id: 2)
+    p2 = Post.create!(title: 'grading', description: 'the professor is a easy grader', view: 0, course_id: 1)
+    p1.comments.create!(text_body: 'i also have question on hw1')
+    p2.comments.create!(text_body: 'no, not a easy grader')
     visit '/courses'
   end
 
