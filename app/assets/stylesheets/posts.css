@@ -93,5 +93,13 @@ body{
 
     }
 .link-muted { color: #aaa; }
-.link-muted:hover { color: #1266f1; }
+.link-muted.like:hover { color: var(--mdb-success); }
+.link-muted.dislike:hover { color: var(--mdb-danger); }
 .link-muted:active { color: #1266f1; }
+
+.show-replies{
+    color: #aaa;
+}
+.collapsed{
+    color: #1266f1 !important;
+}

@@ -13,8 +13,8 @@
         </p>
         <div class="d-flex">
             <% srand(comment.id) %>
-            <a role="button" class="link-muted me-3"><i class="fas fa-thumbs-up me-1"></i> <%= rand(100) %> </a>
-            <a role="button" class="link-muted me-3"><i class="fas fa-thumbs-down me-1"></i> <%= rand(100) %> </a>
+            <a role="button" class="link-muted like me-3"><i class="fas fa-thumbs-up me-1"></i> <%= rand(100) %> </a>
+            <a role="button" class="link-muted dislike me-3"><i class="fas fa-thumbs-down me-1"></i> <%= rand(100) %> </a>
             <a data-mdb-toggle="collapse" href="#replyForm-<%= comment.id %>"><i class="fas fa-reply fa-xs"></i><span class="small"> reply</span></a>
         </div>
       </div>
@@ -34,9 +34,11 @@
       </div>
     </div>
     <% if comment.comments.count > 0 %>
-      <%= render partial: "comments/comment", collection: comment.comments %>
+      <br>
+      <a class="show-replies collapsed" data-mdb-toggle="collapse" href="#replies-<%= comment.id %>">Show replies</a>
+      <div class="collapse" id="replies-<%= comment.id %>">
+        <%= render partial: "comments/comment", collection: comment.comments %>
+      </div>
     <% end %>
-
-
   </div>
 </div>
