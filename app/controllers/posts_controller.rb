@@ -2,7 +2,6 @@
 
 class PostsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-
   def index
     @course = Course.find(params[:course_id])
     @id = params[:course_id]
@@ -60,10 +59,20 @@ class PostsController < ApplicationController
       redirect_to course_posts_path(params[:course_id])
     else
       flash[:warning] = "Post couldn't be created"
-      # render 'new'
       redirect_to(new_course_post_path(params[:course_id]), alert: "Post couldn't be created") and return
     end
   end
+
+  def comments_count(commentable)
+    count = commentable.comments.count
+    if commentable.comments.count.positive?
+      commentable.comments.each do |comment|
+        count += comments_count(comment)
+      end
+    end
+    count
+  end
+  helper_method :comments_count
 
   private
 

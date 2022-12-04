@@ -35,7 +35,7 @@
     </div>
     <% if comment.comments.count > 0 %>
       <br>
-      <a class="show-replies collapsed" data-mdb-toggle="collapse" href="#replies-<%= comment.id %>">Show replies</a>
+      <a class="show-replies collapsed" data-mdb-toggle="collapse" href="#replies-<%= comment.id %>">Show replies (<%= comments_count comment %>)</a>
       <div class="collapse" id="replies-<%= comment.id %>">
         <%= render partial: "comments/comment", collection: comment.comments %>
       </div>
