@@ -19,7 +19,11 @@ const trimComments = ()=>{
         })
     });
 }
-
+function showReplies(commentId, numComments){
+    let toggleText = [`Show Replies (${numComments})`, "Hide Replies"];
+    let toggle = $(`#replyToggle-${commentId}`);
+    toggle.text(toggle.hasClass("collapsed") ? toggleText[0] : toggleText[1]);
+}
 const replyForm = ()=>{
     const rF = $("#replyForm");
     const rT =  $("#replyToggle");

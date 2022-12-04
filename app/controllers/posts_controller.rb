@@ -2,7 +2,6 @@
 
 class PostsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-
   def index
     @course = Course.find(params[:course_id])
     @id = params[:course_id]
@@ -15,7 +14,7 @@ class PostsController < ApplicationController
                when 'ratings'
                  @course.posts.all.with_rich_text_content_and_embeds.order('ratings_count DESC')
                else
-                 @course.posts.all.with_rich_text_content_and_embeds.order('comments_count DESC')
+                 @course.posts.all.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
                end
     else
       @posts = @course.posts.all.with_rich_text_content_and_embeds
@@ -31,7 +30,7 @@ class PostsController < ApplicationController
                when 'ratings'
                  Post.all.with_rich_text_content_and_embeds.order('ratings_count DESC')
                else
-                 Post.all.with_rich_text_content_and_embeds.order('comments_count DESC')
+                 Post.all.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
                end
     else
       @posts = Post.all.with_rich_text_content_and_embeds
@@ -43,8 +42,6 @@ class PostsController < ApplicationController
     @course_id = params[:course_id]
     @post_id = params[:id]
     @post = Course.find(params[:course_id]).posts.find(params[:id])
-    @comments = @post.comments.all
-    @comment = @post.comments.new
   end
 
   def new
@@ -62,10 +59,20 @@ class PostsController < ApplicationController
       redirect_to course_posts_path(params[:course_id])
     else
       flash[:warning] = "Post couldn't be created"
-      # render 'new'
       redirect_to(new_course_post_path(params[:course_id]), alert: "Post couldn't be created") and return
     end
   end
+
+  def comments_count(commentable)
+    count = commentable.comments.count
+    if commentable.comments.count.positive?
+      commentable.comments.each do |comment|
+        count += comments_count(comment)
+      end
+    end
+    count
+  end
+  helper_method :comments_count
 
   private
 

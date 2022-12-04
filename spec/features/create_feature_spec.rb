@@ -15,7 +15,7 @@ RSpec.describe 'create post', type: :feature do
   it 'should successfully create a post' do
     click_on 'Ask a question'
     fill_in 'post[title]', with: 'Test title'
-    find(:xpath, "//input[@id='post_content_trix_input_post']", :visible=>false).set "I have a question"
+    find(:xpath, "//input[@id='description-title_trix_input_post']", :visible=>false).set "I have a question"
     click_on 'Submit'
     expect(page.current_path).to eq('/courses/1/posts')
     expect(page).to have_content('Post Test title successfully created')
@@ -25,7 +25,7 @@ RSpec.describe 'create post', type: :feature do
   it 'should handle failure to create a post gracefully' do
     click_on 'Ask a question'
     fill_in 'post[title]', with: ''
-    find(:xpath, "//input[@id='post_content_trix_input_post']", :visible=>false).set ''
+    find(:xpath, "//input[@id='description-title_trix_input_post']", :visible=>false).set ''
     click_on 'Submit'
 
     # p = @course.posts.new

@@ -1,31 +1,28 @@
 <%= stylesheet_link_tag "posts", "data-turbo-track": "reload" %>
 <div class="container-fluid" id="posts-show-container">
-  <div class="card">
+  <div class="card bg-dark">
     <%= render 'layouts/card_header', uname:@post.id, date:@post.created_at %>
-    <div class="card-body">
+    <div class="card-body bg-light">
       <h5 class="card-title">
         <%= @post.title %>
       </h5>
-      <h6 class="card-subtitle mb-2 text-muted">Asked in <a href=<%= course_posts_path(@post.course.id) %> class="card-link"><%= @post.course.title %></a></h6>
+      <h6 class="card-link card-subtitle mb-2 text-muted">Asked in <a href=<%= course_posts_path(@post.course.id) %>><%= @post.course.title %></a></h6>
       <%= render 'content' %>
 
       <a href="javascript:void(0)" id="replyToggle" class="card-link">Reply</a>
       <%= render 'comments/form' %>
+    </div>
+  <% if @post.comments.count > 0 %>
+      <%= render partial: "comments/comments" %>
+  <% else %>
+        <div class="card mt-5">
+          <div class="card-body">
+            <h5 class="card-title text-center text-danger">No comments yet</h5>
+            <p class="card-text text-center text-warning">Be the first to comment</p>
+          </div>
+        </div>
+  <% end %>
 
-    </div>
-    <div class="card-footer comment-bg">
-      <% if @comments.count > 0%>
-        <ul class="list-group list-group-flush">
-          <%= render @comments %>
-        </ul>
-      <% else%>
-        <p>
-          <em class="text-success">
-            Be the first one to answer this question
-          </em>
-        </p>
-      <% end%>
-    </div>
   </div>
   <br>
   <%= link_to("Back to course", course_posts_path(@course_id), :class => "btn btn-primary")%>
