@@ -18,7 +18,7 @@
             <a data-mdb-toggle="collapse" href="#replyForm-<%= comment.id %>"><i class="fas fa-reply fa-xs"></i><span class="small"> reply</span></a>
         </div>
       </div>
-      <p class="small mb-0">
+      <p class="small mb-0 comment-text">
         <%= comment.text_body %>
       </p>
     </div>
@@ -33,9 +33,17 @@
         <% end %>
       </div>
     </div>
-    <% if comment.comments.count > 0 %>
+    <% @num_comments = comments_count comment  %>
+    <% if @num_comments.positive? %>
       <br>
-      <a class="show-replies collapsed" data-mdb-toggle="collapse" href="#replies-<%= comment.id %>">Show replies (<%= comments_count comment %>)</a>
+      <a class="show-replies collapsed"
+         data-mdb-toggle="collapse"
+         href="#replies-<%= comment.id %>"
+         id="replyToggle-<%= comment.id %>"
+         onclick="showReplies(<%= comment.id %>, <%= @num_comments %>)"
+      >
+        Show replies (<%= @num_comments %>)
+      </a>
       <div class="collapse" id="replies-<%= comment.id %>">
         <%= render partial: "comments/comment", collection: comment.comments %>
       </div>
