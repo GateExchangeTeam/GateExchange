@@ -90,7 +90,7 @@ body{
 .comment {
         border-left:4px solid rgba(0, 0, 0, 0.1);
         padding: 10px;
-
+        background-color: #F7F7F7;
     }
 .link-muted { color: #aaa; }
 .link-muted.like:hover { color: var(--mdb-success); }
