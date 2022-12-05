@@ -12,7 +12,7 @@ class PostsController < ApplicationController
                when 'views'
                  @course.posts.order(view: :desc).with_rich_text_content_and_embeds
                when 'ratings'
-                 @course.posts.all.with_rich_text_content_and_embeds.order('ratings_count DESC')
+                 @course.posts.all.left_joins(:ratings).group(:id).order('SUM(ratings.up) DESC')
                else
                  @course.posts.all.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
                end
@@ -28,7 +28,7 @@ class PostsController < ApplicationController
                when 'views'
                  Post.order(view: :desc).with_rich_text_content_and_embeds
                when 'ratings'
-                 Post.all.with_rich_text_content_and_embeds.order('ratings_count DESC')
+                 Post.all.left_joins(:ratings).group(:id).order('SUM(ratings.up) DESC')
                else
                  Post.all.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
                end

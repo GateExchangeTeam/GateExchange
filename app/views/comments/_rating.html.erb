@@ -1,7 +1,7 @@
 <% @num_likes = local_assigns[:rating].nil? ? 0 : local_assigns[:rating].up %>
 <% @num_dislikes = local_assigns[:rating].nil? ? 0 : local_assigns[:rating].down %>
 
-<!--Random number to decide if the user has liked or disliked the post-->
+<!--Random number to decide if the user has liked or disliked the comment-->
 <!--TODO: Replace this with the user's rating later on-->
 <% @comment_rating = %w[like dislike none][rand(0..2)] %>
 
