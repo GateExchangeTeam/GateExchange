@@ -12,7 +12,7 @@
           User name <span class="small">~ <%= local_time comment.created_at %> </span>
         </p>
         <div class="d-flex">
-            <%= render 'comments/rating', rating:comment.ratings.first %>
+            <%= render 'comments/rating', ratings:comment.ratings %>
             <a data-mdb-toggle="collapse" href="#replyForm-<%= comment.id %>"><i class="fas fa-reply fa-xs"></i><span class="small"> reply</span></a>
         </div>
       </div>

@@ -14,11 +14,11 @@
               <%=link_to "Oldest", course_post_path(:sort => "oldest")%>
             </div>
           </div>
-          <% if !params[:sort].nil? %>
-            <a href="<%= course_post_path %>" class="btn btn-outline-danger">Clear sorting
-              <i class="fa-solid fa-circle-xmark ms-2"></i>
-            </a>
-          <% end %>
+          <% unless params[:sort].nil? %>
+          <a href="<%=  course_post_path  %>" class="btn btn-outline-danger">Clear sorting
+            <i class="fa-solid fa-circle-xmark ms-2"></i>
+          </a>
+          <%  end %>
           <div class="row">
             <div class="col">
               <%= render partial: "comments/comment", collection: sort_comments(@post) %>

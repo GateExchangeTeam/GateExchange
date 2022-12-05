@@ -375,15 +375,23 @@ Course.all.each { |course| course.posts.create!(posts.shuffle.slice(0, rand(1..5
   Comment.all.sample.comments.create!(comments.shuffle.slice(0, rand(1..10)))
 end
 
+def upvote(rateable)
+  rateable.ratings.create!(up:1,down:0)
+end
+
+def downvote(rateable)
+  rateable.ratings.create!(up:0,down:1)
+end
+
 def rate_collection(collection)
   collection.each do |item|
-    chance = rand(1..4)
-    if chance == 1
-      item.ratings.create!(up:rand(50..100), down:rand(1..50))
-    elsif chance == 2
-      item.ratings.create!(up:rand(1..50), down:rand(50..100))
-    elsif chance == 3
-      item.ratings.create!(up:rand(1..100), down:rand(1..100))
+    (1..10).each do ||
+      chance = rand(1..3)
+      if chance == 1
+        upvote(item)
+      elsif chance == 2
+        downvote(item)
+      end
     end
   end
 end
