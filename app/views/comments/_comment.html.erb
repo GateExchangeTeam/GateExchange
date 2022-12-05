@@ -12,16 +12,7 @@
           User name <span class="small">~ <%= local_time comment.created_at %> </span>
         </p>
         <div class="d-flex">
-            <% srand(comment.id) %>
-            <% @comment_rating = %w[like dislike none][rand(0..2)] %>
-            <a role="button"
-               class="<%= @comment_rating == 'like' ? 'link-success':'link-muted' %> like me-3">
-              <i class="fas fa-thumbs-up me-1"></i> <%= rand(100) %>
-            </a>
-            <a role="button"
-               class="<%= @comment_rating == 'dislike' ? 'link-danger':'link-muted' %> dislike me-3">
-              <i class="fas fa-thumbs-down me-1"></i> <%= rand(100) %>
-            </a>
+            <%= render 'comments/rating', rating:comment.ratings.first %>
             <a data-mdb-toggle="collapse" href="#replyForm-<%= comment.id %>"><i class="fas fa-reply fa-xs"></i><span class="small"> reply</span></a>
         </div>
       </div>
