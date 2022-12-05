@@ -5,8 +5,9 @@ class CreateRatings < ActiveRecord::Migration[7.0]
     create_table :ratings do |t|
       t.integer :up
       t.integer :down
-
+      t.references :rateable, polymorphic: true
       t.timestamps
     end
+
   end
 end
