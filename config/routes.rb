@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :posts do
+      resources :ratings
       resources :comments do
+        resources :ratings
         resources :comments
       end
     end
