@@ -77,6 +77,24 @@ class PostsController < ApplicationController
     count
   end
   helper_method :comments_count
+  def sort_comments(commentable)
+    if !params[:sort].nil?
+      sort = params[:sort]
+      @comments = case sort
+                  when 'likes'
+                    commentable.comments.all.left_joins(:ratings).group(:id).order('SUM(ratings.up) DESC')
+                  when 'dislikes'
+                    commentable.comments.all.left_joins(:ratings).group(:id).order('SUM(ratings.down) DESC')
+                  when 'newest'
+                    commentable.comments.all.all.order('created_at DESC')
+                  else
+                    commentable.comments.all
+                  end
+    else
+      @comments = commentable.comments.all
+    end
+  end
+  helper_method :sort_comments
 
   private
 
