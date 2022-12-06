@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_01_031230) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_21_073745) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -82,7 +82,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_031230) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "course_id"
-    t.integer "ratings_count"
     t.index ["course_id"], name: "index_posts_on_course_id"
   end
 
@@ -96,12 +95,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_031230) do
   create_table "ratings", force: :cascade do |t|
     t.integer "up"
     t.integer "down"
+    t.string "rateable_type"
+    t.integer "rateable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "post_id"
     t.integer "comment_id"
     t.index ["comment_id"], name: "index_ratings_on_comment_id"
     t.index ["post_id"], name: "index_ratings_on_post_id"
+    t.index ["rateable_type", "rateable_id"], name: "index_ratings_on_rateable"
   end
 
   create_table "tags", force: :cascade do |t|

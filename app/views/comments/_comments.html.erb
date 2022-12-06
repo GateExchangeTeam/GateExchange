@@ -3,9 +3,25 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-body p-4">
+          <div class="dropdown">
+            <button class="btn btn-outline-primary">Sort Comments
+              <i class="fa-solid fa-filter ms-2"></i>
+            </button>
+            <div class="dropdown-content">
+              <%=link_to "Most Liked", course_post_path(:sort=>"likes")%>
+              <%=link_to "Most Disliked", course_post_path(:sort => "dislikes")%>
+              <%=link_to "Newest", course_post_path(:sort => "newest")%>
+              <%=link_to "Oldest", course_post_path(:sort => "oldest")%>
+            </div>
+          </div>
+          <% unless params[:sort].nil? %>
+          <a href="<%=  course_post_path  %>" class="btn btn-outline-danger">Clear sorting
+            <i class="fa-solid fa-circle-xmark ms-2"></i>
+          </a>
+          <%  end %>
           <div class="row">
             <div class="col">
-              <%= render partial: "comments/comment", collection: @post.comments %>
+              <%= render partial: "comments/comment", collection: sort_comments(@post) %>
             </div>
           </div>
         </div>

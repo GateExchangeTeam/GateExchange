@@ -1,0 +1,15 @@
+<% @num_likes = local_assigns[:ratings].count.positive? ? local_assigns[:ratings].sum(:up): 0  %>
+<% @num_dislikes = local_assigns[:ratings].count.positive? ? local_assigns[:ratings].sum(:down) : 0 %>
+
+<!--Random number to decide if the user has liked or disliked the post-->
+<!--TODO: Replace this with the user's rating later on-->
+<% @comment_rating = %w[like dislike none][rand(0..2)] %>
+
+<a role="button"
+   class="<%= @comment_rating == 'like' ? 'link-success':'link-muted' %> like mx-3">
+  <i class="fa-2x fas fa-thumbs-up me-1"></i> <%= @num_likes %>
+</a>
+<a role="button"
+   class="<%= @comment_rating == 'dislike' ? 'link-danger':'link-muted' %> dislike mx-3">
+  <i class="fa-2x fas fa-thumbs-down me-1"></i> <%= @num_dislikes %>
+</a>

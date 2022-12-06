@@ -11,8 +11,10 @@ class PostsController < ApplicationController
       @posts = case sort
                when 'views'
                  @course.posts.order(view: :desc).with_rich_text_content_and_embeds
-               when 'ratings'
-                 @course.posts.all.with_rich_text_content_and_embeds.order('ratings_count DESC')
+               when 'likes'
+                 @course.posts.all.left_joins(:ratings).group(:id).order('SUM(ratings.up) DESC')
+               when 'dislikes'
+                 @course.posts.all.left_joins(:ratings).group(:id).order('SUM(ratings.down) DESC')
                else
                  @course.posts.all.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
                end
@@ -27,8 +29,10 @@ class PostsController < ApplicationController
       @posts = case sort
                when 'views'
                  Post.order(view: :desc).with_rich_text_content_and_embeds
-               when 'ratings'
-                 Post.all.with_rich_text_content_and_embeds.order('ratings_count DESC')
+               when 'likes'
+                 Post.all.left_joins(:ratings).group(:id).order('SUM(ratings.up) DESC')
+               when 'dislikes'
+                 Post.all.left_joins(:ratings).group(:id).order('SUM(ratings.down) DESC')
                else
                  Post.all.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
                end
@@ -73,6 +77,24 @@ class PostsController < ApplicationController
     count
   end
   helper_method :comments_count
+  def sort_comments(commentable)
+    if !params[:sort].nil?
+      sort = params[:sort]
+      @comments = case sort
+                  when 'likes'
+                    commentable.comments.all.left_joins(:ratings).group(:id).order('SUM(ratings.up) DESC')
+                  when 'dislikes'
+                    commentable.comments.all.left_joins(:ratings).group(:id).order('SUM(ratings.down) DESC')
+                  when 'newest'
+                    commentable.comments.all.all.order('created_at DESC')
+                  else
+                    commentable.comments.all
+                  end
+    else
+      @comments = commentable.comments.all
+    end
+  end
+  helper_method :sort_comments
 
   private
 
