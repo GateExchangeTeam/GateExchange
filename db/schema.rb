@@ -51,10 +51,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_073745) do
 
   create_table "comments", force: :cascade do |t|
     t.string "text_body"
-    t.integer "commentable_id"
     t.string "commentable_type"
+    t.integer "commentable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
   end
 
   create_table "courses", force: :cascade do |t|
