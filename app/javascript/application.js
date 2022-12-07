@@ -8,7 +8,7 @@ import Rails from '@rails/ujs';
 Rails.start();
 LocalTime.start()
 
-jquery(function() {
+$(function() {
     setTimeout(function(){
         $('.flash-messages').slideUp(500); // Remove flash messages after a second
     }, 1000);

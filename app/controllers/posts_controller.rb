@@ -19,7 +19,7 @@ class PostsController < ApplicationController
                  @course.posts.all.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
                end
     else
-      @posts = @course.posts.all.with_rich_text_content_and_embeds
+      @posts = @course.posts.all.with_rich_text_content_and_embeds.order("updated_at DESC")
     end
   end
 
@@ -37,7 +37,7 @@ class PostsController < ApplicationController
                  Post.all.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
                end
     else
-      @posts = Post.all.with_rich_text_content_and_embeds
+      @posts = Post.all.with_rich_text_content_and_embeds.order("updated_at DESC")
     end
     render 'posts/all'
   end
@@ -65,6 +65,24 @@ class PostsController < ApplicationController
       flash[:warning] = "Post couldn't be created"
       redirect_to(new_course_post_path(params[:course_id]), alert: "Post couldn't be created") and return
     end
+  end
+
+  def update
+    @post = Course.find(params[:course_id]).posts.find(params[:id])
+    @post.description = @post.content.to_plain_text.strip
+    if @post.update(create_params)
+      flash[:notice] = 'Post successfully updated'
+      redirect_to course_post_path(params[:course_id], params[:id])
+    else
+      flash[:warning] = "Post couldn't be updated"
+      redirect_to(edit_course_post_path(params[:course_id], params[:id]), alert: "Post couldn't be updated") and return
+    end
+  end
+
+  def edit
+    @id = params[:course_id]
+    @course = Course.find(@id)
+    @post = @course.posts.find(params[:id])
   end
 
   private
