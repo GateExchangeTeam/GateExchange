@@ -1,7 +1,8 @@
 <%= stylesheet_link_tag "posts", "data-turbo-track": "reload" %>
 <div class="container-fluid" id="posts-show-container">
   <div class="card bg-dark">
-    <%= render 'layouts/card_header', uname:@post.id, date:@post.created_at %>
+<!--    TODO: Make the edit and delete buttons conditional on user priveleges -->
+    <%= render 'layouts/card_header', uname:@post.id, date:@post.updated_at, edit:edit_course_post_path %>
     <div class="card-body bg-light">
       <h5 class="card-title">
         <%= @post.title %>
