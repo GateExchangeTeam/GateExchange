@@ -19,6 +19,17 @@ class CommentsController < ApplicationController
     end
   end
 
+  def update
+    @comment = Comment.find(params[:id])
+    if @comment.user == current_user
+      @comment.update(create_params)
+      flash[:notice] = "Comment successfully updated"
+    else
+      flash[:warning] = "You can't update this comment"
+    end
+    redirect_to course_post_path(params[:course_id], params[:post_id])
+  end
+
   def destroy
     @comment = Comment.find(params[:comment_id])
     if @comment.user == current_user

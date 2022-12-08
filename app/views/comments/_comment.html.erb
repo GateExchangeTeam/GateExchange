@@ -19,6 +19,10 @@
               <span class="small ms-1">Reply</span>
             </a>
             <% if comment.user == current_user %>
+              <a class="ms-2" data-mdb-toggle="collapse" href="#editForm-<%= comment.id %>">
+                <i class="fas fa-edit fa-xs"></i>
+                <span class="small ms-1">Edit</span>
+              </a>
               <a href="<%= course_post_comment_path(:post_id=>@post.id, :comment_id=>comment.id) %>"
                data-method="delete"
                class="link-danger mx-2"
@@ -33,7 +37,11 @@
         <%= comment.text_body %>
       </p>
     </div>
+
     <%= render partial: 'comments/reply_form', locals: {comment:comment, Comment:Comment} %>
+
+    <%= render partial: 'comments/edit_form', locals: {comment:comment, Comment:Comment} %>
+
     <% @num_comments = comments_count comment  %>
     <% if @num_comments.positive? %>
       <br>
