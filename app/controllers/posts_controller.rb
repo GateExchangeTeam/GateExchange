@@ -2,6 +2,7 @@
 
 class PostsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  before_action :creator_logged_in?, only: %i[edit update destroy]
   def index
     @course = Course.find(params[:course_id])
     @id = params[:course_id]
@@ -41,6 +42,9 @@ class PostsController < ApplicationController
     @course_id = params[:course_id]
     @post_id = params[:id]
     @post = Course.find(params[:course_id]).posts.find(params[:id])
+    if current_user == @post.user
+      @allow_changes = true
+    end
   end
 
   def new
@@ -98,7 +102,12 @@ class PostsController < ApplicationController
   def create_params
     params.require(:post).permit(:title, :content)
   end
-
+  def creator_logged_in?
+    @post = Course.find(params[:course_id]).posts.find(params[:id])
+    return true if @post.user == current_user
+    flash[:alert] = 'You are not the creator of this post'
+    redirect_to course_post_path(params[:course_id], params[:id]) and return
+  end
   def record_not_found
     flash[:alert] = 'No such post'
     redirect_to course_posts_path and return

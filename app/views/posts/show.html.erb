@@ -1,12 +1,11 @@
 <%= stylesheet_link_tag "posts", "data-turbo-track": "reload" %>
 <div class="container-fluid" id="posts-show-container">
   <div class="card bg-dark">
-<!--    TODO: Make the edit and delete buttons conditional on user priveleges -->
     <%= render 'layouts/card_header',
                uname:@post.user.email,
                date:@post.updated_at,
-               edit:edit_course_post_path,
-               delete:course_post_path,
+               edit: @allow_changes ? edit_course_post_path : nil,
+               delete: @allow_changes ? course_post_path : nil,
                link_to:posts_path(:user=>@post.user.id)
     %>
     <div class="card-body bg-light">
