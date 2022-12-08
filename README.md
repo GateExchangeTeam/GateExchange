@@ -1,6 +1,6 @@
 # README
 
-- Heroku Link: https://sheltered-sierra-81845.herokuapp.com/
+- Heroku Link: https://sheltered-sierra-81845.herokuapp.com/ (cuurently down)
 - Please run:
 ```
   bundle config set --local without production
