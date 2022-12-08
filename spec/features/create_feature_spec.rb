@@ -5,10 +5,15 @@ require 'capybara/dsl'
 require 'selenium-webdriver'
 
 RSpec.describe 'create post', type: :feature do
+  include Devise::Test::IntegrationHelpers
+
   before :each do
     Course.delete_all
+    Post.delete_all
     @course = Course.create!(title: 'Intro to Computing', course_code: '101', description: 'Awesome intro course!',
                              department: 'COSC', faculty: 'multiple')
+    @user = User.create!(email: 'admin@colgate.edu', password: 'Colgate13')
+    sign_in @user
     visit '/courses/1/posts'
   end
 
@@ -45,11 +50,15 @@ RSpec.describe 'create post', type: :feature do
 end
 
 RSpec.describe 'create comment', type: :feature do
+  include Devise::Test::IntegrationHelpers
+
   before :each do
     Course.delete_all
     @course = Course.create!(title: 'Intro to Computing', course_code: '101', description: 'Awesome intro course!',
                              department: 'COSC', faculty: 'multiple')
-    @course.posts.create!(title: 'This is a post', description: 'Hello this is a test post', view: 0)
+    @post = @course.posts.create!(title: 'This is a post', description: 'Hello this is a test post', view: 0)
+    @user = User.create!(email: 'admin@colgate.edu', password: 'Colgate13')
+    sign_in @user
     visit '/courses/1/posts'
   end
 
@@ -75,5 +84,10 @@ RSpec.describe 'create comment', type: :feature do
     expect(page.current_path).to eq('/courses/1/posts/1')
     # expect(page).to have_content("Post couldn't be created")
     expect(page).to have_content("Comment couldn't be created")
+  end
+
+  it 'should successfully create a nested comment' do
+    # to do
+    expect(page).to have_content("do this test")
   end
 end

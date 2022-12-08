@@ -2,7 +2,25 @@
 
 require 'rails_helper'
 
-RSpec.describe 'index page', type: :feature do
+RSpec.describe 'Landing Page', type: :feature do
+  include Devise::Test::IntegrationHelpers
+
+  it 'should display landing page if signed in' do
+    @user = User.create!(email: 'admin@colgate.edu', password: 'Colgate13')
+    sign_in @user
+    visit root_path
+    expect(page).to have_content('Take a look')
+  end
+
+  it 'should reroute to sign-in if not signed in' do
+    visit root_path
+    expect(page).to have_content('Remember me')
+  end
+end
+
+RSpec.describe 'show feature', type: :feature do
+  include Devise::Test::IntegrationHelpers
+
   before :each do
     Course.delete_all
 
@@ -11,12 +29,14 @@ RSpec.describe 'index page', type: :feature do
     Course.create!(title: 'Geography of Happiness', course_code: '350', description: 'Be happy', department: 'GEOL',
                    faculty: 'Joyce')
     Tag.create!(tag_name: 'academics')
-    User.create!(name: 'itsjoyce', email: 'jzhang4@colgate.edu', passcode: 'testtest')
+    User.create!(email: 'jzhang4@colgate.edu', password: 'testtest')
     p1 = Post.create!(title: 'how to do homework 1',
                  description: 'I have the following file /app/validators/hex_color.rb in my Rails app but I got an error', view: 0, course_id: 1)
     p2 = Post.create!(title: 'grading', description: 'the professor is a easy grader', view: 0, course_id: 1)
     p1.comments.create!(text_body: 'i also have question on hw1')
     p2.comments.create!(text_body: 'no, not a easy grader')
+    @user = User.create!(email: 'admin@colgate.edu', password: 'Colgate13')
+    sign_in @user
     visit '/courses'
   end
 
@@ -48,5 +68,15 @@ RSpec.describe 'index page', type: :feature do
     # expect(page).to have_link("Leave your comment")
     expect(page).to have_content('i also have question on hw1')
     expect(page).not_to have_content('no, not a easy grader')
+  end
+
+  it 'sorting posts should work correctly' do
+    # to do
+    expect(page).to have_content("do this test")
+  end
+
+  it 'sorting comments should work correctly' do
+    # to do
+    expect(page).to have_content("do this test")
   end
 end
