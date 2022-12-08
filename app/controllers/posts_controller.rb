@@ -7,10 +7,11 @@ class PostsController < ApplicationController
     @course = Course.find(params[:course_id])
     @id = params[:course_id]
     @posts = @course.posts.all.with_rich_text_content_and_embeds
-
+    @user = nil
     # Allow filtering only posts by the specified user
     unless params[:user].nil?
       @posts = @posts.where(user: User.find(params[:user]))
+      @user = User.find(params[:user])
     end
 
     if params[:sort].nil?
@@ -27,6 +28,7 @@ class PostsController < ApplicationController
     # Allow filtering only posts by the specified user
     unless params[:user].nil?
       @posts = @posts.where(user: User.find(params[:user]))
+      @user = User.find(params[:user])
     end
 
     if params[:sort].nil?

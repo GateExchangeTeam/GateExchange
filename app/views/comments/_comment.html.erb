@@ -19,14 +19,14 @@
               <span class="small ms-1">Reply</span>
             </a>
             <% if comment.user == current_user %>
-            <a href="<%= course_post_comment_path(:post_id=>@post.id, :comment_id=>comment.id) %>"
+              <a href="<%= course_post_comment_path(:post_id=>@post.id, :comment_id=>comment.id) %>"
                data-method="delete"
                class="link-danger mx-2"
-            >
-              <i class="fas fa-trash-alt fa-xs mx-1"></i>
-              <span class="small">Delete</span>
-            </a>
-        <% end %>
+              >
+                <i class="fas fa-trash-alt fa-xs mx-1"></i>
+                <span class="small">Delete</span>
+              </a>
+            <% end %>
         </div>
       </div>
       <p class="small mb-0 comment-text mt-3">
