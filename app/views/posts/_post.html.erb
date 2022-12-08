@@ -4,7 +4,7 @@
       <%= render 'layouts/card_header',
                  uname:post.user.email,
                  date:post.updated_at,
-                 link_to:course_posts_path(post.course.id,:user=>post.user.id)
+                 link_to:course_posts_path(post.course.id,:user=>post.user.id,:sort=>params[:sort])
       %>
       <div class="card-body">
         <div class="container">
