@@ -75,7 +75,7 @@ user_list << User.create!(:email => "user3@colgate.edu", :password => "user3pass
 # Give each course a random sample of posts from random users
 Course.all.each do |course|
   rand(5..10).times do
-    course.posts.create!(:user => user_list.sample, :title => Faker::Lorem.sentence, :description => Faker::Lorem.paragraph)
+    course.posts.create!(:user => user_list.sample, :title => Faker::Lorem.sentence, :description => Faker::Lorem.paragraph, :view=>rand(0..100))
   end
 end
 

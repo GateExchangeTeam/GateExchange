@@ -6,7 +6,8 @@
                uname:@post.user.email,
                date:@post.updated_at,
                edit:edit_course_post_path,
-               delete:course_post_path
+               delete:course_post_path,
+               link_to:course_post_path(:user=>@post.user.id)
     %>
     <div class="card-body bg-light">
       <h5 class="card-title">

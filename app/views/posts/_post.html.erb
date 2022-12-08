@@ -1,7 +1,11 @@
 <div class="row">
   <div class="col-md-12">
     <div class="card card-shadow">
-      <%= render 'layouts/card_header', uname:post.user.email, date:post.updated_at %>
+      <%= render 'layouts/card_header',
+                 uname:post.user.email,
+                 date:post.updated_at,
+                 link_to:course_posts_path(post.course.id,:user=>post.user.id)
+      %>
       <div class="card-body">
         <div class="container">
           <div class="row">
