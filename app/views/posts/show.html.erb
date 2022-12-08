@@ -3,7 +3,7 @@
   <div class="card bg-dark">
 <!--    TODO: Make the edit and delete buttons conditional on user priveleges -->
     <%= render 'layouts/card_header',
-               uname:@post.id,
+               uname:@post.user.email,
                date:@post.updated_at,
                edit:edit_course_post_path,
                delete:course_post_path
