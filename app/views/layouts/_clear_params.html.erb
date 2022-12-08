@@ -1,0 +1,8 @@
+<% unless local_assigns[:params].all?(&:nil?) %>
+  <div class="mx-2">
+    <a href="<%=  local_assigns[:path]  %>" class="btn btn-outline-danger">
+        Show Default
+      <i class="fa-solid fa-arrow-rotate-left ms-2"></i>
+    </a>
+  </div>
+<%  end %>

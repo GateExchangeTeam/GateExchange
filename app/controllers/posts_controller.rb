@@ -2,42 +2,38 @@
 
 class PostsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  before_action :creator_logged_in?, only: %i[edit update destroy]
   def index
     @course = Course.find(params[:course_id])
     @id = params[:course_id]
+    @posts = @course.posts.all.with_rich_text_content_and_embeds
 
-    if !params[:sort].nil?
-      sort = params[:sort]
-      @posts = case sort
-               when 'views'
-                 @course.posts.order(view: :desc).with_rich_text_content_and_embeds
-               when 'likes'
-                 @course.posts.all.left_joins(:ratings).group(:id).order('SUM(ratings.up) DESC')
-               when 'dislikes'
-                 @course.posts.all.left_joins(:ratings).group(:id).order('SUM(ratings.down) DESC')
-               else
-                 @course.posts.all.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
-               end
+    # Allow filtering only posts by the specified user
+    unless params[:user].nil?
+      @posts = @posts.where(user: User.find(params[:user]))
+    end
+
+    if params[:sort].nil?
+      @posts = @posts.order("updated_at DESC")
     else
-      @posts = @course.posts.all.with_rich_text_content_and_embeds
+      sort = params[:sort]
+      @posts = sort_posts(@posts, sort)
     end
   end
 
   def all
-    if !params[:sort].nil?
-      sort = params[:sort]
-      @posts = case sort
-               when 'views'
-                 Post.order(view: :desc).with_rich_text_content_and_embeds
-               when 'likes'
-                 Post.all.left_joins(:ratings).group(:id).order('SUM(ratings.up) DESC')
-               when 'dislikes'
-                 Post.all.left_joins(:ratings).group(:id).order('SUM(ratings.down) DESC')
-               else
-                 Post.all.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
-               end
+    @posts = Post.all.with_rich_text_content_and_embeds
+
+    # Allow filtering only posts by the specified user
+    unless params[:user].nil?
+      @posts = @posts.where(user: User.find(params[:user]))
+    end
+
+    if params[:sort].nil?
+      @posts = @posts.order("updated_at DESC")
     else
-      @posts = Post.all.with_rich_text_content_and_embeds
+      sort = params[:sort]
+      @posts = sort_posts(@posts, sort)
     end
     render 'posts/all'
   end
@@ -46,6 +42,9 @@ class PostsController < ApplicationController
     @course_id = params[:course_id]
     @post_id = params[:id]
     @post = Course.find(params[:course_id]).posts.find(params[:id])
+    if current_user == @post.user
+      @allow_changes = true
+    end
   end
 
   def new
@@ -58,6 +57,7 @@ class PostsController < ApplicationController
     @post = Course.find(params[:course_id]).posts.new(create_params) # create a new post for this specific course
     @post.description = @post.content.to_plain_text.strip
     @post.view = 0
+    @post.user = current_user
     if @post.save
       flash[:notice] = "Post #{@post.title} successfully created"
       redirect_to course_posts_path(params[:course_id])
@@ -67,14 +67,62 @@ class PostsController < ApplicationController
     end
   end
 
-  private
-
-  def create_params
-    params.require(:post).permit(:title, :content) # plus any other fields
+  def edit
+    @id = params[:course_id]
+    @course = Course.find(@id)
+    @post = @course.posts.find(params[:id])
   end
 
+  def update
+    @post = Course.find(params[:course_id]).posts.find(params[:id])
+
+    if @post.update(update_params)
+      @post.description = @post.content.to_plain_text.strip unless @post.content.nil?
+      flash[:notice] = 'Post successfully updated'
+      redirect_to course_post_path(params[:course_id], params[:id])
+    else
+      flash[:warning] = "Post couldn't be updated"
+      redirect_to(edit_course_post_path(params[:course_id], params[:id]), alert: "Post couldn't be updated") and return
+    end
+  end
+
+  def destroy
+    @post = Course.find(params[:course_id]).posts.find(params[:id])
+    @post.destroy
+    flash[:notice] = 'Post successfully deleted'
+    redirect_to course_posts_path(params[:course_id])
+  end
+
+  private
+
+  def update_params
+    params.require(:post).permit(:title, :content, :description)
+  end
+
+  def create_params
+    params.require(:post).permit(:title, :content)
+  end
+  def creator_logged_in?
+    @post = Course.find(params[:course_id]).posts.find(params[:id])
+    return true if @post.user == current_user
+    flash[:alert] = 'You are not the creator of this post'
+    redirect_to course_post_path(params[:course_id], params[:id]) and return
+  end
   def record_not_found
     flash[:alert] = 'No such post'
     redirect_to course_posts_path and return
+  end
+
+  def sort_posts(posts, sort)
+    case sort
+             when 'views'
+               posts.order(view: :desc).with_rich_text_content_and_embeds
+             when 'likes'
+               posts.left_joins(:ratings).group(:id).order('SUM(ratings.up) DESC')
+             when 'dislikes'
+               posts.left_joins(:ratings).group(:id).order('SUM(ratings.down) DESC')
+             else
+               posts.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
+            end
   end
 end

@@ -7,33 +7,7 @@
         </h1>
         <div class="navbar-nav me-auto mb-2 mb-lg-0">
           <div class="d-flex">
-            <% if @course.nil? %>
-              <%  if current_page?(posts_path) %>
-                <div class="dropdown">
-                  <button class="btn btn-outline-success">Filter Posts</button>
-                  <div class="dropdown-content">
-                    <%= link_to "Comments", posts_path(:sort => "comments") %>
-                    <%= link_to "Most Liked", posts_path(:sort => "likes") %>
-                    <%= link_to "Most Disliked", posts_path(:sort => "dislikes") %>
-                    <%= link_to "Most Viewed", posts_path(:sort => "views") %>
-                  </div>
-                </div>
-                <%= render "layouts/clear_sort", sort:params[:sort], path:posts_path %>
-              <% end %>
-            <% else %>
-              <%  if current_page?(course_posts_path(@course.id)) %>
-                <div class="dropdown">
-                  <button class="btn btn-outline-success">Filter Posts</button>
-                  <div class="dropdown-content">
-                    <%= link_to "Comments", course_posts_path(@course.id, :sort => "comments") %>
-                    <%= link_to "Most Liked", course_posts_path(@course.id, :sort => "likes") %>
-                    <%= link_to "Most Disliked", course_posts_path(@course.id, :sort => "dislikes") %>
-                    <%= link_to "Most Viewed", course_posts_path(@course.id,  :sort => "views") %>
-                  </div>
-                </div>
-                <%= render "layouts/clear_sort", sort:params[:sort], path:course_posts_path(@course.id) %>
-              <% end %>
-            <% end %>
+            <%= render "layouts/sort_and_filter", locals: {course: @course} %>
           </div>
         </div>
       </div>
