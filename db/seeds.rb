@@ -81,8 +81,8 @@ end
 
 # Randomly sprinkle in some comments
 50.times do
-  Post.all.sample.comments.create!(:text_body => Faker::Lorem.paragraph)
-  Comment.all.sample.comments.create!(:text_body => Faker::Lorem.paragraph)
+  Post.all.sample.comments.create!(:text_body => Faker::Lorem.paragraph, :user => user_list.sample)
+  Comment.all.sample.comments.create!(:text_body => Faker::Lorem.paragraph, :user => user_list.sample)
 end
 
 def upvote(rateable)

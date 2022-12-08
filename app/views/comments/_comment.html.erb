@@ -1,6 +1,6 @@
 <div class="d-flex flex-start mt-4 comment rounded-5 hover-shadow">
   <img class="rounded-circle bg-dark shadow-1-strong me-3"
-       src="https://avatars.dicebear.com/api/bottts/<%= comment.id %>.svg"
+       src="https://avatars.dicebear.com/api/bottts/<%= comment.user.email %>.svg"
        height="35"
        alt="Robot"
        loading="lazy"
@@ -9,7 +9,8 @@
     <div>
       <div class="d-flex justify-content-between align-items-center">
         <p class="mb-1">
-          User name <span class="small">~ <%= local_time comment.created_at %> </span>
+          <%= comment.user.email %>
+          <span class="small">~ <%= local_time comment.updated_at %> </span>
         </p>
         <div class="d-flex">
             <%= render 'comments/rating', ratings:comment.ratings %>

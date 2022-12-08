@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
     @course_id = params[:course_id]
     @post_id = params[:post_id]
     @commentable = @commentable.comments.new(create_params)
+    @commentable.user = current_user
 
     if @commentable.save
       flash[:notice] = 'Reply sent'
