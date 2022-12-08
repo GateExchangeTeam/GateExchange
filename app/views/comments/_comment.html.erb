@@ -14,24 +14,24 @@
         </p>
         <div class="d-flex">
             <%= render 'comments/rating', ratings:comment.ratings %>
-            <a data-mdb-toggle="collapse" href="#replyForm-<%= comment.id %>"><i class="fas fa-reply fa-xs"></i><span class="small"> reply</span></a>
+            <a data-mdb-toggle="collapse" href="#replyForm-<%= comment.id %>">
+              <i class="fas fa-reply fa-xs"></i>
+              <span class="small ms-1">Reply</span>
+            </a>
+            <a href="<%= course_post_comment_path(:post_id=>@post.id, :comment_id=>comment.id) %>"
+               data-method="delete"
+               class="link-danger mx-2"
+            >
+              <i class="fas fa-trash-alt fa-xs mx-1"></i>
+              <span class="small">Delete</span>
+            </a>
         </div>
       </div>
       <p class="small mb-0 comment-text mt-3">
         <%= comment.text_body %>
       </p>
     </div>
-    <div class="collapse" id="replyForm-<%= comment.id %>">
-      <div class="form-outline w-100 mt-3">
-        <%= form_for [comment, Comment.new], url: course_post_comment_comments_path(:comment_id=>comment.id, :post_id=>@post_id) do |comment_form|%>
-          <div class="form-outline mb-4">
-            <%= comment_form.text_area :text_body, :class => "form-control", :rows=>"4", :id=>"form4Example3"  %>
-            <label class="form-label" for="form4Example3">Message</label>
-          </div>
-          <button type="submit" id="replySubmit" class="btn btn-primary btn-block mb-4">Reply</button>
-        <% end %>
-      </div>
-    </div>
+    <%= render partial: 'comments/reply_form', locals: {comment:comment, Comment:Comment} %>
     <% @num_comments = comments_count comment  %>
     <% if @num_comments.positive? %>
       <br>
@@ -44,7 +44,7 @@
         Show replies (<%= @num_comments %>)
       </a>
       <div class="collapse" id="replies-<%= comment.id %>">
-        <%= render partial: "comments/comment", collection: comment.comments %>
+        <%= render partial: "comments/comment", collection: sort_comments(comment) %>
       </div>
     <% end %>
   </div>
