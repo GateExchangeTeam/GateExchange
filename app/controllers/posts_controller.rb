@@ -85,6 +85,13 @@ class PostsController < ApplicationController
     @post = @course.posts.find(params[:id])
   end
 
+  def destroy
+    @post = Course.find(params[:course_id]).posts.find(params[:id])
+    @post.destroy
+    flash[:notice] = 'Post successfully deleted'
+    redirect_to course_posts_path(params[:course_id])
+  end
+
   private
 
   def create_params

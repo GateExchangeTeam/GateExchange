@@ -20,22 +20,26 @@
       <div class="col d-flex flex-row-reverse">
 
         <% if local_assigns[:delete] %>
-          <span class="p-2 badge badge-dark">
-            <a href="<%= local_assigns[:delete] %>" class="card-link text-light">
-              <i class="fa fa-trash link-danger mx-1 fa-lg"></i>
+          <span class="px-2 py-3 badge badge-dark">
+            <a href="<%= local_assigns[:delete] %>" class="card-link text-light" data-method="delete">
+              <i class="fa fa-trash link-danger mx-1 fa-lg">
+                <span class="font-monospace ms-1">Delete</span>
+              </i>
             </a>
           </span>
         <% end %>
 
         <% if local_assigns[:edit] %>
-          <span class="p-2 badge badge-dark mx-2">
+          <span class="px-2 py-3 badge badge-dark mx-2">
             <a href="<%= local_assigns[:edit] %>" class="card-link text-light">
-              <i class="fa fa-pen link-info mx-1 fa-lg"></i>
+              <i class="fa fa-pen link-info mx-1 fa-lg">
+                <span class="font-monospace ms-1">Edit</span>
+              </i>
             </a>
           </span>
         <% end %>
 
-         <span class="p-2 badge badge-dark bg-gradient text-warning">
+         <span class="px-2 py-3 badge badge-dark bg-gradient text-warning">
              <%= local_time local_assigns[:date], :class =>"timestamp" %>
         </span>
       </div>

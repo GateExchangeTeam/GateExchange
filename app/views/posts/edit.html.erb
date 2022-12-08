@@ -20,11 +20,11 @@
                                    :rows=>"4",
                                    :class=>"form-control",
                                    :id=>"description-title",
-                                   :value=> @post.content.to_s %>
+                                   :value=> @post.content.nil? ? @post.description : @post.content.to_s %>
       <%= post_form.label :content, "Description", :class=>"form-label" %>
     </div>
 
-    <button type="submit", id = "submit-new", class="btn btn-success btn-block mb-4">Submit</button>
+    <button type="submit" id = "submit-new" class="btn btn-success btn-block mb-4">Submit</button>
   <% end %>
   <br>
   <%= link_to("Back to posts", course_posts_path, :class => "btn btn-primary")%>
