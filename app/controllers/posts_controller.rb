@@ -5,39 +5,22 @@ class PostsController < ApplicationController
   def index
     @course = Course.find(params[:course_id])
     @id = params[:course_id]
-
-    if !params[:sort].nil?
-      sort = params[:sort]
-      @posts = case sort
-               when 'views'
-                 @course.posts.order(view: :desc).with_rich_text_content_and_embeds
-               when 'likes'
-                 @course.posts.all.left_joins(:ratings).group(:id).order('SUM(ratings.up) DESC')
-               when 'dislikes'
-                 @course.posts.all.left_joins(:ratings).group(:id).order('SUM(ratings.down) DESC')
-               else
-                 @course.posts.all.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
-               end
+    @posts = @course.posts.all.with_rich_text_content_and_embeds
+    if params[:sort].nil?
+      @posts = @posts.order("updated_at DESC")
     else
-      @posts = @course.posts.all.with_rich_text_content_and_embeds.order('updated_at DESC')
+      sort = params[:sort]
+      @posts = sort_posts(@posts, sort)
     end
   end
 
   def all
-    if !params[:sort].nil?
-      sort = params[:sort]
-      @posts = case sort
-               when 'views'
-                 Post.order(view: :desc).with_rich_text_content_and_embeds
-               when 'likes'
-                 Post.all.left_joins(:ratings).group(:id).order('SUM(ratings.up) DESC')
-               when 'dislikes'
-                 Post.all.left_joins(:ratings).group(:id).order('SUM(ratings.down) DESC')
-               else
-                 Post.all.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
-               end
+    @posts = Post.all.with_rich_text_content_and_embeds
+    if params[:sort].nil?
+      @posts = @posts.order("updated_at DESC")
     else
-      @posts = Post.all.with_rich_text_content_and_embeds.order('updated_at DESC')
+      sort = params[:sort]
+      @posts = sort_posts(@posts, sort)
     end
     render 'posts/all'
   end
@@ -106,5 +89,18 @@ class PostsController < ApplicationController
   def record_not_found
     flash[:alert] = 'No such post'
     redirect_to course_posts_path and return
+  end
+
+  def sort_posts(posts, sort)
+    case sort
+             when 'views'
+               posts.order(view: :desc).with_rich_text_content_and_embeds
+             when 'likes'
+               posts.left_joins(:ratings).group(:id).order('SUM(ratings.up) DESC')
+             when 'dislikes'
+               posts.left_joins(:ratings).group(:id).order('SUM(ratings.down) DESC')
+             else
+               posts.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
+            end
   end
 end
