@@ -3,8 +3,8 @@
     <div class="dropdown">
       <button class="btn btn-outline-success">Sort Posts</button>
       <div class="dropdown-content">
-        <%= link_to "Comments", posts_path(:sort => "comments"), :user=>params[:user] %>
-        <%= link_to "Most Liked", posts_path(:sort => "likes"), :user=>params[:user] %>
+        <%= link_to "Comments", posts_path(:sort => "comments", :user=>params[:user]) %>
+        <%= link_to "Most Liked", posts_path(:sort => "likes", :user=>params[:user]) %>
         <%= link_to "Most Disliked", posts_path(:sort => "dislikes", :user=>params[:user] ) %>
         <%= link_to "Most Viewed", posts_path(:sort => "views", :user=>params[:user]) %>
       </div>
