@@ -12,6 +12,10 @@ Rails.application.routes.draw do
         put 'dislike', to: 'posts#dislike'
       end
       resources :comments do
+        member do
+          put 'like', to: 'comments#like'
+          put 'dislike', to: 'comments#dislike'
+        end
         resources :comments
       end
     end

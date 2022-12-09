@@ -1,12 +1,36 @@
-<% @num_likes = 0 %>
-<% @num_dislikes = 0 %>
+<% @num_likes = comment.get_likes.size %>
+<% @num_dislikes = comment.get_dislikes.size %>
+<span>
+   <% if current_user.liked? comment %>
+     <%= link_to like_course_post_comment_path(:course_id=>post.course.id, :post_id=>post.id, :id=>comment.id, :format=>'unlike'), :id=>"like-#{comment.id}", class: "liked-btn link-success like mx-3" , method: :put, remote: :true do %>
+       <i class="fa-2x fas fa-thumbs-up me-1"></i>
+       <span class="like-count">
+       <%= @num_likes %>
+     </span>
+     <% end %>
+   <% else %>
+     <%= link_to like_course_post_comment_path(:course_id=>post.course.id, :post_id=>post.id, :id=>comment.id, :format=>'like'), :id=>"like-#{comment.id}", class: "like-btn link-muted like mx-3", method: :put, remote: :true do %>
+       <i class="fa-2x fas fa-thumbs-up me-1"></i>
+       <span class="like-count">
+         <%= @num_likes %>
+       </span>
+     <% end %>
+   <% end %>
 
+  <% if current_user.disliked? post %>
+     <%= link_to dislike_course_post_comment_path(:course_id=>post.course.id, :post_id=>post.id, :id=>comment.id, :format=>'undislike'), :id=>"dislike-#{comment.id}", class: "disliked-btn link-danger dislike mx-3", method: :put, remote: :true do %>
+       <i class="fa-2x fas fa-thumbs-down me-1"></i>
+       <span class="dislike-count">
+       <%= @num_dislikes %>
+     </span>
+     <% end %>
+   <% else %>
+     <%= link_to dislike_course_post_comment_path(:course_id=>post.course.id, :post_id=>post.id, :id=>comment.id, :format=>'dislike'), :id=>"dislike-#{comment.id}", class: "dislike-btn link-muted dislike mx-3", method: :put, remote: :true do %>
+       <i class="fa-2x fas fa-thumbs-down me-1"></i>
+       <span class="dislike-count">
+         <%= @num_dislikes %>
+       </span>
+     <% end %>
+   <% end %>
+ </span>
 
-<a role="button"
-   class="like me-3">
-  <i class="fas fa-thumbs-up me-1"></i> <%= @num_likes %>
-</a>
-<a role="button"
-   class="dislike me-3">
-  <i class="fas fa-thumbs-down me-1"></i> <%= @num_dislikes %>
-</a>

@@ -2,6 +2,7 @@
 
 class CommentsController < ApplicationController
   before_action :find_commentable
+  respond_to :js, :html, :json
   def create
     @course_id = params[:course_id]
     @post_id = params[:post_id]
@@ -40,6 +41,26 @@ class CommentsController < ApplicationController
     end
 
     redirect_to course_post_path(params[:course_id], params[:post_id])
+  end
+
+  def like
+    @comment = Comment.find(params[:id])
+    case params[:format]
+    when 'like'
+      @comment.liked_by current_user
+    when 'unlike'
+      @comment.unliked_by current_user
+    end
+  end
+
+  def dislike
+    @comment = Comment.find(params[:id])
+    case params[:format]
+    when 'dislike'
+      @comment.disliked_by current_user
+    when 'undislike'
+      @comment.undisliked_by current_user
+    end
   end
 
   private
