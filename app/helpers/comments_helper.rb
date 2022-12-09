@@ -22,12 +22,12 @@ module CommentsHelper
                   when 'dislikes'
                     commentable.comments.all.left_joins(:ratings).group(:id).order('SUM(ratings.down) DESC')
                   when 'newest'
-                    commentable.comments.all.all.order('created_at DESC')
+                    commentable.comments.all.order('updated_at DESC')
                   else
                     commentable.comments.all
                   end
     else
-      @comments = commentable.comments.all
+      @comments = commentable.comments.all.order('updated_at DESC')
     end
   end
 end

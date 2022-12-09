@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
     @course_id = params[:course_id]
     @post_id = params[:post_id]
     @commentable = @commentable.comments.new(create_params)
+    @commentable.user = current_user
 
     if @commentable.save
       flash[:notice] = 'Reply sent'
@@ -16,6 +17,29 @@ class CommentsController < ApplicationController
       redirect_to(course_post_path(params[:course_id], params[:post_id]),
                   alert: "Post couldn't be created") and return
     end
+  end
+
+  def update
+    @comment = Comment.find(params[:id])
+    if @comment.user == current_user
+      @comment.update(create_params)
+      flash[:notice] = "Comment successfully updated"
+    else
+      flash[:warning] = "You can't update this comment"
+    end
+    redirect_to course_post_path(params[:course_id], params[:post_id])
+  end
+
+  def destroy
+    @comment = Comment.find(params[:comment_id])
+    if @comment.user == current_user
+      flash[:notice] = "Comment successfully deleted"
+      @comment.destroy
+    else
+      flash[:warning] = "You can't delete this comment"
+    end
+
+    redirect_to course_post_path(params[:course_id], params[:post_id])
   end
 
   private
