@@ -3,6 +3,7 @@
 class PostsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   before_action :creator_logged_in?, only: %i[edit update destroy]
+  before_action :authenticate_user!
   respond_to :js, :html, :json
 
   def like
@@ -24,11 +25,12 @@ class PostsController < ApplicationController
       @post.undisliked_by current_user
     end
   end
+
   def index
     @course = Course.find(params[:course_id])
     @id = params[:course_id]
     @posts = @course.posts.all.with_rich_text_content_and_embeds
-    @user = nil
+
     # Allow filtering only posts by the specified user
     unless params[:user].nil?
       @posts = @posts.where(user: User.find(params[:user]))
@@ -36,7 +38,7 @@ class PostsController < ApplicationController
     end
 
     if params[:sort].nil?
-      @posts = @posts.order("updated_at DESC")
+      @posts = @posts.order('updated_at DESC')
     else
       sort = params[:sort]
       @posts = sort_posts(@posts, sort)
@@ -53,14 +55,15 @@ class PostsController < ApplicationController
     end
 
     if params[:sort].nil?
-      @posts = @posts.order("updated_at DESC")
+      @posts = @posts.order('updated_at DESC')
     else
       sort = params[:sort]
       @posts = sort_posts(@posts, sort)
     end
 
-    if !params[:search_input].nil?
-      @posts = @posts.where("title like ?", "%"+ params[:search_input]+"%")
+    unless params[:search_input].nil?
+      @posts = @posts.where('title like ?', '%'+ params[:search_input]+'%')
+      @search_term = params[:search_input]
     end
     render 'posts/all'
   end
@@ -129,12 +132,14 @@ class PostsController < ApplicationController
   def create_params
     params.require(:post).permit(:title, :content)
   end
+
   def creator_logged_in?
     @post = Course.find(params[:course_id]).posts.find(params[:id])
     return true if @post.user == current_user
     flash[:alert] = 'You are not the creator of this post'
     redirect_to course_post_path(params[:course_id], params[:id]) and return
   end
+
   def record_not_found
     flash[:alert] = 'No such post'
     redirect_to course_posts_path and return

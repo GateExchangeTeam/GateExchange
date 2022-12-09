@@ -6,6 +6,7 @@
         <h2 class="text-warning">
           All Posts
           <%= "by #{@user.email}" unless @user.nil? %>
+          <%= "matching '#{params[:search_input]}'" unless @search_term.nil? %>
         </h2>
         <br>
       </div>
