@@ -1,0 +1,27 @@
+<% if @course.nil? %>
+  <%  if current_page?(posts_path) %>
+    <div class="dropdown">
+      <button class="btn btn-outline-success">Sort Posts</button>
+      <div class="dropdown-content">
+        <%= link_to "Comments", posts_path(:sort => "comments", :user=>params[:user]) %>
+        <%= link_to "Most Liked", posts_path(:sort => "likes", :user=>params[:user]) %>
+        <%= link_to "Most Disliked", posts_path(:sort => "dislikes", :user=>params[:user] ) %>
+        <%= link_to "Most Viewed", posts_path(:sort => "views", :user=>params[:user]) %>
+      </div>
+    </div>
+    <%= render "layouts/clear_params", params:[params[:sort], params[:user]], path:posts_path %>
+  <% end %>
+<% else %>
+  <%  if current_page?(course_posts_path(@course.id)) %>
+    <div class="dropdown">
+      <button class="btn btn-outline-success">Sort Posts</button>
+      <div class="dropdown-content">
+        <%= link_to "Comments", course_posts_path(@course.id, :sort => "comments", :user=>params[:user]) %>
+        <%= link_to "Most Liked", course_posts_path(@course.id, :sort => "likes", :user=>params[:user]) %>
+        <%= link_to "Most Disliked", course_posts_path(@course.id, :sort => "dislikes", :user=>params[:user]) %>
+        <%= link_to "Most Viewed", course_posts_path(@course.id,  :sort => "views", :user=>params[:user]) %>
+      </div>
+    </div>
+    <%= render "layouts/clear_params", params:[params[:sort], params[:user]], path:course_posts_path(@course.id) %>
+  <% end %>
+<% end %>

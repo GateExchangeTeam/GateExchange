@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  devise_for :users
   root 'landing#index'
   get '/posts', to: 'posts#all'
-  resources :tags
 
   resources :courses do
     resources :posts do

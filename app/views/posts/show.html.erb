@@ -1,7 +1,13 @@
 <%= stylesheet_link_tag "posts", "data-turbo-track": "reload" %>
 <div class="container-fluid" id="posts-show-container">
   <div class="card bg-dark">
-    <%= render 'layouts/card_header', uname:@post.id, date:@post.created_at %>
+    <%= render 'layouts/card_header',
+               uname:@post.user.email,
+               date:@post.updated_at,
+               edit: @allow_changes ? edit_course_post_path : nil,
+               delete: @allow_changes ? course_post_path : nil,
+               link_to:posts_path(:user=>@post.user.id)
+    %>
     <div class="card-body bg-light">
       <h5 class="card-title">
         <%= @post.title %>

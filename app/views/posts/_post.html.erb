@@ -1,7 +1,12 @@
 <div class="row">
   <div class="col-md-12">
     <div class="card card-shadow">
-      <%= render 'layouts/card_header', uname:post.id, date:post.created_at %>
+      <% user_link = local_assigns[:all_courses] ? posts_path(:user=>post.user.id,:sort=>params[:sort]) : course_posts_path(post.course.id,:user=>post.user.id,:sort=>params[:sort]) %>
+      <%= render 'layouts/card_header',
+                 uname:post.user.email,
+                 date:post.updated_at,
+                 link_to: user_link
+      %>
       <div class="card-body">
         <div class="container">
           <div class="row">
