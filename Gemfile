@@ -38,6 +38,9 @@ gem 'jbuilder'
 # Authenticate using devise
 gem 'devise'
 
+# Create fake data for seeds
+gem 'faker'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
@@ -51,6 +54,9 @@ gem 'bootsnap', require: false
 gem "image_processing", "~> 1.2"
 
 gem 'local_time'
+
+# Voting gem
+gem 'acts_as_votable'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

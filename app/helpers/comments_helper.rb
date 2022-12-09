@@ -18,16 +18,16 @@ module CommentsHelper
       sort = params[:sort]
       @comments = case sort
                   when 'likes'
-                    commentable.comments.all.left_joins(:ratings).group(:id).order('SUM(ratings.up) DESC')
+                    commentable.comments.order(cached_votes_up: :desc)
                   when 'dislikes'
-                    commentable.comments.all.left_joins(:ratings).group(:id).order('SUM(ratings.down) DESC')
+                    commentable.comments.all.order(cached_votes_down: :desc)
                   when 'newest'
-                    commentable.comments.all.all.order('created_at DESC')
+                    commentable.comments.all.order('updated_at DESC')
                   else
                     commentable.comments.all
                   end
     else
-      @comments = commentable.comments.all
+      @comments = commentable.comments.all.order('updated_at DESC')
     end
   end
 end
