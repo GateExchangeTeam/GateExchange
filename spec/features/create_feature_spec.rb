@@ -96,7 +96,7 @@ RSpec.describe 'create comment', type: :feature do
     expect(page).to have_content('Reply sent')
     expect(page).to have_content('This is a comment')
     find("#replyForm-1").click
-    fill_in '#replyFormContent-2', with: 'This is a nested comment'
+    find(:xpath, "//input[@id='form4Example3']").set ''
     expect(page).to have_content('Show replies')
 
   end
