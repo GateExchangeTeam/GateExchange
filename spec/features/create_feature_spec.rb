@@ -88,6 +88,16 @@ RSpec.describe 'create comment', type: :feature do
 
   it 'should successfully create a nested comment' do
     # to do
-    expect(page).to have_content("do this test")
+    click_on 'View details'
+    find("#replyToggle").click
+    fill_in 'comment[text_body]', with: 'This is a comment'
+    find('#replySubmit').click
+    expect(page.current_path).to eq('/courses/1/posts/1')
+    expect(page).to have_content('Reply sent')
+    expect(page).to have_content('This is a comment')
+    find("#replyForm-1").click
+    fill_in '#replyFormContent-2', with: 'This is a nested comment'
+    expect(page).to have_content('Show replies')
+
   end
 end

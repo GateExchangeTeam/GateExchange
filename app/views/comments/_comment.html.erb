@@ -13,7 +13,7 @@
         </p>
         <div class="d-flex">
             <%= render 'comments/rating', ratings:comment.ratings %>
-            <a data-mdb-toggle="collapse" href="#replyForm-<%= comment.id %>"><i class="fas fa-reply fa-xs"></i><span class="small"> reply</span></a>
+            <a data-mdb-toggle="collapse" href="#replyForm-<%= comment.id %>"><i class="fas fa-reply fa-xs"></i><span class="small" class="comment-reply"> reply</span></a>
         </div>
       </div>
       <p class="small mb-0 comment-text mt-3">
@@ -24,8 +24,8 @@
       <div class="form-outline w-100 mt-3">
         <%= form_for [comment, Comment.new], url: course_post_comment_comments_path(:comment_id=>comment.id, :post_id=>@post_id) do |comment_form|%>
           <div class="form-outline mb-4">
-            <%= comment_form.text_area :text_body, :class => "form-control", :rows=>"4", :id=>"form4Example3"  %>
-            <label class="form-label" for="form4Example3">Message</label>
+            <%= comment_form.text_area :text_body, :class => "form-control", :rows=>"4", :id=>"form4Example3" %>
+            <label class="form-label" for="form4Example3" href="#replyFormContent-<%= comment.id %>">Message</label>
           </div>
           <button type="submit" id="replySubmit" class="btn btn-primary btn-block mb-4">Reply</button>
         <% end %>
