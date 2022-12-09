@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Comment < ApplicationRecord
+  acts_as_votable
   validates :text_body, length: { minimum: 5 }, allow_nil: false, presence: true
   has_many :ratings, as: :rateable
   belongs_to :commentable, polymorphic: true
