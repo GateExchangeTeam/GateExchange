@@ -77,22 +77,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_051124) do
     t.datetime "updated_at", null: false
     t.integer "course_id"
     t.integer "user_id", null: false
+    t.integer "cached_votes_total", default: 0
+    t.integer "cached_votes_score", default: 0
+    t.integer "cached_votes_up", default: 0
+    t.integer "cached_votes_down", default: 0
+    t.integer "cached_weighted_score", default: 0
+    t.integer "cached_weighted_total", default: 0
+    t.float "cached_weighted_average", default: 0.0
     t.index ["course_id"], name: "index_posts_on_course_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
-  end
-
-  create_table "ratings", force: :cascade do |t|
-    t.integer "up"
-    t.integer "down"
-    t.string "rateable_type"
-    t.integer "rateable_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "post_id"
-    t.integer "comment_id"
-    t.index ["comment_id"], name: "index_ratings_on_comment_id"
-    t.index ["post_id"], name: "index_ratings_on_post_id"
-    t.index ["rateable_type", "rateable_id"], name: "index_ratings_on_rateable"
   end
 
   create_table "users", force: :cascade do |t|

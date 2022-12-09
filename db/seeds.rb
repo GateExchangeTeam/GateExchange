@@ -84,3 +84,11 @@ end
   Post.all.sample.comments.create!(:text_body => Faker::Lorem.paragraph, :user => user_list.sample)
   Comment.all.sample.comments.create!(:text_body => Faker::Lorem.paragraph, :user => user_list.sample)
 end
+
+# Randomly rate posts
+User.all.each do |user|
+  10.times do
+    Post.all.sample.liked_by user
+    Post.all.sample.disliked_by user
+  end
+end

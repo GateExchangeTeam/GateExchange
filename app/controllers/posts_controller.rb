@@ -141,9 +141,9 @@ class PostsController < ApplicationController
              when 'views'
                posts.order(view: :desc).with_rich_text_content_and_embeds
              when 'likes'
-               posts.left_joins(:ratings).group(:id).order('SUM(ratings.up) DESC')
+               Post.order(cached_votes_up: :desc).with_rich_text_content_and_embeds
              when 'dislikes'
-               posts.left_joins(:ratings).group(:id).order('SUM(ratings.down) DESC')
+               Post.order(cached_votes_down: :desc).with_rich_text_content_and_embeds
              else
                posts.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
             end
