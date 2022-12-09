@@ -3,7 +3,7 @@
 
 <!--Random number to decide if the user has liked or disliked the comment-->
 <!--TODO: Replace this with the user's rating later on-->
-<% @comment_rating = %w[like dislike none][rand(0..2)] %>
+<% @comment_rating = rating_for(local_assigns[:rateable],current_user) %>
 
 <a role="button"
    class="<%= @comment_rating == 'like' ? 'link-success':'link-muted' %> like me-3">

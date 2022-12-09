@@ -13,7 +13,7 @@
           <span class="small">~ <%= local_time comment.updated_at %> </span>
         </p>
         <div class="d-flex">
-            <%= render 'comments/rating', ratings:comment.ratings %>
+            <%= render 'comments/rating', ratings:comment.ratings,  rateable:comment %>
             <a data-mdb-toggle="collapse" href="#replyForm-<%= comment.id %>">
               <i class="fas fa-reply fa-xs"></i>
               <span class="small ms-1">Reply</span>

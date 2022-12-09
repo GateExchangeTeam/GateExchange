@@ -63,34 +63,46 @@ courses = [
 Course.delete_all
 Post.delete_all
 Comment.delete_all
+Rating.delete_all
 User.delete_all
 
 Course.create!(courses)
 
-user_list = []
-user_list << User.create!(:email => "user1@colgate.edu", :password => "user1@colgate.edu")
-user_list << User.create!(:email => "user2@colgate.edu", :password => "user2pass")
-user_list << User.create!(:email => "user3@colgate.edu", :password => "user3pass")
+@user_list = []
+@user_list << User.create!(:email => "user1@colgate.edu", :password => "user1@colgate.edu")
+@user_list << User.create!(:email => "user2@colgate.edu", :password => "user2pass")
+@user_list << User.create!(:email => "user3@colgate.edu", :password => "user3pass")
 
 # Give each course a random sample of posts from random users
 Course.all.each do |course|
   rand(5..10).times do
-    course.posts.create!(:user => user_list.sample, :title => Faker::Lorem.sentence, :description => Faker::Lorem.paragraph, :view=>rand(0..100))
+    course.posts.create!(:user => @user_list.sample,
+                         :title => Faker::Lorem.sentence,
+                         :description => Faker::Lorem.paragraph,
+                         :view=>rand(0..100)
+    )
   end
 end
 
 # Randomly sprinkle in some comments
 50.times do
-  Post.all.sample.comments.create!(:text_body => Faker::Lorem.paragraph, :user => user_list.sample)
-  Comment.all.sample.comments.create!(:text_body => Faker::Lorem.paragraph, :user => user_list.sample)
+  Post.all.sample.comments.create!(:text_body => Faker::Lorem.paragraph, :user => @user_list.sample)
+  Comment.all.sample.comments.create!(:text_body => Faker::Lorem.paragraph, :user => @user_list.sample)
 end
 
 def upvote(rateable)
-  rateable.ratings.create!(up:1,down:0)
+  user = @user_list.sample
+  if rateable.ratings.find_by(user: user).nil?
+    rateable.ratings.create!(:up=>1, :down=>0, :user=>@user_list.sample)
+  end
+
 end
 
 def downvote(rateable)
-  rateable.ratings.create!(up:0,down:1)
+  user = @user_list.sample
+  if rateable.ratings.find_by(user: user).nil?
+    rateable.ratings.create!(:up=>0, :down=>1, :user=>@user_list.sample)
+  end
 end
 
 def rate_collection(collection)

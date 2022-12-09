@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_08_205646) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_09_032622) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -90,9 +90,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_205646) do
     t.datetime "updated_at", null: false
     t.integer "post_id"
     t.integer "comment_id"
+    t.integer "user_id", null: false
     t.index ["comment_id"], name: "index_ratings_on_comment_id"
     t.index ["post_id"], name: "index_ratings_on_post_id"
     t.index ["rateable_type", "rateable_id"], name: "index_ratings_on_rateable"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -111,4 +113,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_205646) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "users"
   add_foreign_key "posts", "users"
+  add_foreign_key "ratings", "users"
 end
