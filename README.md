@@ -1,4 +1,5 @@
 # README
+![Screenshot 2022-12-09 at 18-56-16 Edit your own logo](https://user-images.githubusercontent.com/62907095/206813853-1cecefe1-c897-4810-b09e-e84b858d9d3a.png)
 
 - Heroku Link: https://sheltered-sierra-81845.herokuapp.com/ (Currently down)
 - Please run:
