@@ -85,26 +85,10 @@ end
   Comment.all.sample.comments.create!(:text_body => Faker::Lorem.paragraph, :user => user_list.sample)
 end
 
-def upvote(rateable)
-  rateable.ratings.create!(up:1,down:0)
-end
-
-def downvote(rateable)
-  rateable.ratings.create!(up:0,down:1)
-end
-
-def rate_collection(collection)
-  collection.each do |item|
-    (1..10).each do ||
-      chance = rand(1..3)
-      if chance == 1
-        upvote(item)
-      elsif chance == 2
-        downvote(item)
-      end
-    end
+# Randomly rate posts
+User.all.each do |user|
+  10.times do
+    Post.all.sample.liked_by user
+    Post.all.sample.disliked_by user
   end
 end
-
-rate_collection(Post.all)
-rate_collection(Comment.all)

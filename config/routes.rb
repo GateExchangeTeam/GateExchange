@@ -7,9 +7,11 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :posts do
-      resources :ratings
+      member do
+        put 'like', to: 'posts#like'
+        put 'dislike', to: 'posts#dislike'
+      end
       resources :comments do
-        resources :ratings
         resources :comments
       end
     end

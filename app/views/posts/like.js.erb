@@ -1,0 +1,30 @@
+function unlike(){
+    $(this).find(".like-count").text("<%= @post.get_likes.size %>");
+    $(this).attr("href", $(this).attr("href").replace("like.unlike", "like.like"));
+    $(this).removeClass("liked-btn");
+    $(this).addClass("like-btn");
+    $(this).removeClass("link-success");
+    $(this).addClass("link-muted");
+}
+
+function like(){
+    // Like the post
+    $(this).find(".like-count").text("<%= @post.get_likes.size %>");
+    $(this).attr("href", $(this).attr("href").replace("like.like", "like.unlike"));
+    $(this).removeClass("like-btn");
+    $(this).addClass("liked-btn");
+    $(this).removeClass("link-muted");
+    $(this).addClass("link-success");
+
+    // Undislike the post
+    let dislikeBtn = $(this).next();
+    dislikeBtn.find(".dislike-count").text("<%= @post.get_dislikes.size %>");
+    dislikeBtn.attr("href", dislikeBtn.attr("href").replace("dislike.undislike", "dislike.dislike"));
+    dislikeBtn.removeClass("disliked-btn");
+    dislikeBtn.addClass("dislike-btn");
+    dislikeBtn.removeClass("link-danger");
+    dislikeBtn.addClass("link-muted");
+}
+
+$(".liked-btn").on('ajax:success',unlike);
+$(".like-btn").on('ajax:success',like);

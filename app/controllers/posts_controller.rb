@@ -3,6 +3,27 @@
 class PostsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   before_action :creator_logged_in?, only: %i[edit update destroy]
+  respond_to :js, :html, :json
+
+  def like
+    @post = Post.find(params[:id])
+    case params[:format]
+    when 'like'
+      @post.liked_by current_user
+    when 'unlike'
+      @post.unliked_by current_user
+    end
+  end
+
+  def dislike
+    @post = Post.find(params[:id])
+    case params[:format]
+    when 'dislike'
+      @post.disliked_by current_user
+    when 'undislike'
+      @post.undisliked_by current_user
+    end
+  end
   def index
     @course = Course.find(params[:course_id])
     @id = params[:course_id]
@@ -124,9 +145,9 @@ class PostsController < ApplicationController
              when 'views'
                posts.order(view: :desc).with_rich_text_content_and_embeds
              when 'likes'
-               posts.left_joins(:ratings).group(:id).order('SUM(ratings.up) DESC')
+               Post.order(cached_votes_up: :desc).with_rich_text_content_and_embeds
              when 'dislikes'
-               posts.left_joins(:ratings).group(:id).order('SUM(ratings.down) DESC')
+               Post.order(cached_votes_down: :desc).with_rich_text_content_and_embeds
              else
                posts.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
             end
