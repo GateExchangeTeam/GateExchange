@@ -9,7 +9,7 @@
         <%= link_to "Most Viewed", posts_path(:sort => "views", :user=>params[:user]) %>
       </div>
     </div>
-    <%= render "layouts/clear_params", params:[params[:sort], params[:user]], path:posts_path %>
+    <%= render "layouts/clear_params", params:[params[:sort], params[:user], params[:search_input]], path:posts_path %>
   <% end %>
 <% else %>
   <%  if current_page?(course_posts_path(@course.id)) %>

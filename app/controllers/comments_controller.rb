@@ -2,7 +2,9 @@
 
 class CommentsController < ApplicationController
   before_action :find_commentable
+  before_action :authenticate_user!
   respond_to :js, :html, :json
+  
   def create
     @course_id = params[:course_id]
     @post_id = params[:post_id]
