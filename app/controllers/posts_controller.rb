@@ -62,7 +62,7 @@ class PostsController < ApplicationController
     end
 
     unless params[:search_input].nil?
-      @posts = @posts.where('title like ?', '%'+ params[:search_input]+'%')
+      @posts = @posts.where('title like ?', "%#{params[:search_input]}%")
       @search_term = params[:search_input]
     end
     render 'posts/all'
@@ -72,9 +72,9 @@ class PostsController < ApplicationController
     @course_id = params[:course_id]
     @post_id = params[:id]
     @post = Course.find(params[:course_id]).posts.find(params[:id])
-    if current_user == @post.user
-      @allow_changes = true
-    end
+    return unless current_user == @post.user
+
+    @allow_changes = true
   end
 
   def new
@@ -136,6 +136,7 @@ class PostsController < ApplicationController
   def creator_logged_in?
     @post = Course.find(params[:course_id]).posts.find(params[:id])
     return true if @post.user == current_user
+
     flash[:alert] = 'You are not the creator of this post'
     redirect_to course_post_path(params[:course_id], params[:id]) and return
   end
@@ -147,14 +148,14 @@ class PostsController < ApplicationController
 
   def sort_posts(posts, sort)
     case sort
-             when 'views'
-               posts.order(view: :desc).with_rich_text_content_and_embeds
-             when 'likes'
-               Post.order(cached_votes_up: :desc).with_rich_text_content_and_embeds
-             when 'dislikes'
-               Post.order(cached_votes_down: :desc).with_rich_text_content_and_embeds
-             else
-               posts.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
-            end
+    when 'views'
+      posts.order(view: :desc).with_rich_text_content_and_embeds
+    when 'likes'
+      Post.order(cached_votes_up: :desc).with_rich_text_content_and_embeds
+    when 'dislikes'
+      Post.order(cached_votes_down: :desc).with_rich_text_content_and_embeds
+    else
+      posts.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
+    end
   end
 end

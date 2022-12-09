@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   before_action :find_commentable
   before_action :authenticate_user!
   respond_to :js, :html, :json
-  
+
   def create
     @course_id = params[:course_id]
     @post_id = params[:post_id]
@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     if @comment.user == current_user
       @comment.update(create_params)
-      flash[:notice] = "Comment successfully updated"
+      flash[:notice] = 'Comment successfully updated'
     else
       flash[:warning] = "You can't update this comment"
     end
@@ -36,7 +36,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:comment_id])
     if @comment.user == current_user
-      flash[:notice] = "Comment successfully deleted"
+      flash[:notice] = 'Comment successfully deleted'
       @comment.destroy
     else
       flash[:warning] = "You can't delete this comment"
