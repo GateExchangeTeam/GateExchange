@@ -5,10 +5,15 @@ require 'capybara/dsl'
 require 'selenium-webdriver'
 
 RSpec.describe 'create post', type: :feature do
+  include Devise::Test::IntegrationHelpers
+
   before :each do
     Course.delete_all
+    Post.delete_all
     @course = Course.create!(title: 'Intro to Computing', course_code: '101', description: 'Awesome intro course!',
                              department: 'COSC', faculty: 'multiple')
+    @user = User.create!(email: 'admin@colgate.edu', password: 'Colgate13')
+    sign_in @user
     visit '/courses/1/posts'
   end
 
@@ -45,11 +50,15 @@ RSpec.describe 'create post', type: :feature do
 end
 
 RSpec.describe 'create comment', type: :feature do
+  include Devise::Test::IntegrationHelpers
+
   before :each do
     Course.delete_all
     @course = Course.create!(title: 'Intro to Computing', course_code: '101', description: 'Awesome intro course!',
                              department: 'COSC', faculty: 'multiple')
-    @course.posts.create!(title: 'This is a post', description: 'Hello this is a test post', view: 0)
+    @user = User.create!(email: 'admin@colgate.edu', password: 'Colgate13')
+    sign_in @user
+    @post = @course.posts.create!(title: 'This is a post', description: 'Hello this is a test post', view: 0, user: @user)
     visit '/courses/1/posts'
   end
 
@@ -76,4 +85,21 @@ RSpec.describe 'create comment', type: :feature do
     # expect(page).to have_content("Post couldn't be created")
     expect(page).to have_content("Comment couldn't be created")
   end
+
+  # it 'should successfully create a nested comment' do
+  #   # to do
+  #   click_on 'View details'
+  #   find("#replyToggle").click
+  #   fill_in 'comment[text_body]', with: 'This is a comment'
+  #   find('#replySubmit').click
+  #   expect(page.current_path).to eq('/courses/1/posts/1')
+  #   expect(page).to have_content('Reply sent')
+  #   expect(page).to have_content('This is a comment')
+  #
+  #   find("#replyForm-1").click
+  #   first(:xpath, "//descendant::textarea[@id='form4Example3']").set 'Tested comment 2'
+  #   all('#replySubmit')[1].click
+  #   expect(page).to have_content('Show replies')
+  #
+  # end
 end

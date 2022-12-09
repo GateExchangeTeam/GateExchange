@@ -42,6 +42,7 @@
 
     <%= render partial: 'comments/edit_form', locals: {comment:comment, Comment:Comment} %>
 
+
     <% @num_comments = comments_count comment  %>
     <% if @num_comments.positive? %>
       <br>
