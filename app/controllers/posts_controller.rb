@@ -39,6 +39,10 @@ class PostsController < ApplicationController
     else
       @posts = Post.all.with_rich_text_content_and_embeds
     end
+
+    if !params[:search_input].nil?
+      @posts = @posts.where("title like ?", "%"+ params[:search_input]+"%")
+    end
     render 'posts/all'
   end
 
