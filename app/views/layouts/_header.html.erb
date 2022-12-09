@@ -21,10 +21,10 @@
           <%= link_to "Login", new_user_session_path%>
         <% end %>
       </div>
-      <form role="search" class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <%= form_with  url: posts_path, local: true, method: :get do |f|%>
+        <%= f.text_field :search_input, :id=>"search_input"%>
+        <%= f.submit "Search" , {:class=>"btn btn-outline-success"}%>
+      <%- end %>
     </div>
   </nav>
 </div>

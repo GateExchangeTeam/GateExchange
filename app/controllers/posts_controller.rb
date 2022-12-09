@@ -37,6 +37,10 @@ class PostsController < ApplicationController
       sort = params[:sort]
       @posts = sort_posts(@posts, sort)
     end
+
+    if !params[:search_input].nil?
+      @posts = @posts.where("title like ?", "%"+ params[:search_input]+"%")
+    end
     render 'posts/all'
   end
 
