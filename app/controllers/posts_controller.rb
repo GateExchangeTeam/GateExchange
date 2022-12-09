@@ -3,6 +3,27 @@
 class PostsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   before_action :creator_logged_in?, only: %i[edit update destroy]
+  respond_to :js, :html, :json
+
+  def like
+    @post = Post.find(params[:id])
+    case params[:format]
+    when 'like'
+      @post.liked_by current_user
+    when 'unlike'
+      @post.unliked_by current_user
+    end
+  end
+
+  def dislike
+    @post = Post.find(params[:id])
+    case params[:format]
+    when 'dislike'
+      @post.disliked_by current_user
+    when 'undislike'
+      @post.undisliked_by current_user
+    end
+  end
   def index
     @course = Course.find(params[:course_id])
     @id = params[:course_id]

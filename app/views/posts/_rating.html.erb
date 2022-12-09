@@ -1,15 +1,37 @@
-<% @num_likes = local_assigns[:ratings].sum(:up) %>
-<% @num_dislikes = local_assigns[:ratings].sum(:down) %>
+<% @num_likes = post.get_likes.size %>
+<% @num_dislikes = post.get_dislikes.size %>
+<span>
+  <% if current_user.liked? post %>
+    <%= link_to like_course_post_path(:course_id=>post.course.id, :id=>post.id, :format=>'unlike'), :id=>"like-#{post.id}", class: "liked-btn link-success like mx-3" , method: :put, remote: :true do %>
+      <i class="fa-2x fas fa-thumbs-up me-1"></i>
+      <span class="like-count">
+      <%= @num_likes %>
+    </span>
+    <% end %>
+  <% else %>
+    <%= link_to like_course_post_path(:course_id=>post.course.id, :id=>post.id, :format=>'like'), :id=>"like-#{post.id}", class: "like-btn link-muted like mx-3", method: :put, remote: :true do %>
+      <i class="fa-2x fas fa-thumbs-up me-1"></i>
+      <span class="like-count">
+        <%= @num_likes %>
+      </span>
+    <% end %>
+  <% end %>
 
-<!--Random number to decide if the user has liked or disliked the post-->
-<!--TODO: Replace this with the user's rating later on-->
-<% @comment_rating = %w[like dislike none][rand(0..2)] %>
+  <% if current_user.disliked? post %>
+    <%= link_to dislike_course_post_path(:course_id=>post.course.id, :id=>post.id, :format=>'undislike'), :id=>"dislike-#{post.id}", class: "disliked-btn link-danger dislike mx-3", method: :put, remote: :true do %>
+      <i class="fa-2x fas fa-thumbs-down me-1"></i>
+      <span class="dislike-count">
+      <%= @num_dislikes %>
+    </span>
+    <% end %>
+  <% else %>
+    <%= link_to dislike_course_post_path(:course_id=>post.course.id, :id=>post.id, :format=>'dislike'), :id=>"dislike-#{post.id}", class: "dislike-btn link-muted dislike mx-3", method: :put, remote: :true do %>
+      <i class="fa-2x fas fa-thumbs-down me-1"></i>
+      <span class="dislike-count">
+        <%= @num_dislikes %>
+      </span>
+    <% end %>
+  <% end %>
+</span>
 
-<a role="button"
-   class="<%= @comment_rating == 'like' ? 'link-success':'link-muted' %> like mx-3">
-  <i class="fa-2x fas fa-thumbs-up me-1"></i> <%= @num_likes %>
-</a>
-<a role="button"
-   class="<%= @comment_rating == 'dislike' ? 'link-danger':'link-muted' %> dislike mx-3">
-  <i class="fa-2x fas fa-thumbs-down me-1"></i> <%= @num_dislikes %>
-</a>
+
