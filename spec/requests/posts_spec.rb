@@ -10,9 +10,9 @@ RSpec.describe 'Post Index paths', type: :request do
     Post.delete_all
     @course = Course.create!(title: 'Intro to Computing', course_code: '101', description: 'Awesome intro course!',
                              department: 'COSC', faculty: 'multiple')
-    @course.posts.create!(title: 'This is a post', description: 'Hello this is a test post', view: 0)
     @user = User.create!(email: 'admin@colgate.edu', password: 'Colgate13')
     sign_in @user
+    @course.posts.create!(title: 'This is a post', description: 'Hello this is a test post', view: 0, user: @user)
   end
 
   it 'should correctly route for the index view' do
