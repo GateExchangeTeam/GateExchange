@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Rails server",
+            "type": "Ruby",
+            "request": "launch",
+            "program": "${workspaceRoot}/bin/rails",
+            "args": ["server"],
+            "useBundler": true,
+            "cwd": "${workspaceRoot}"
+        },
+        {
+            "name": "Debug Rails tests",
+            "type": "Ruby",
+            "request": "launch",
+            "program": "${workspaceRoot}/bin/rails",
+            "args": ["test"],
+            "useBundler": true,
+            "cwd": "${workspaceRoot}"
+        }
+    ]
+}
